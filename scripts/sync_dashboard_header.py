@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# This script is intentionally the single safe dashboard shell synchronizer used by the production workflow.
+# Safe dashboard shell synchronizer used by the production workflow.
 from pathlib import Path
 from datetime import datetime
 from zoneinfo import ZoneInfo
@@ -42,17 +42,10 @@ def transaction_section() -> str:
         doc = json.loads(TRANSACTIONS.read_text())
     rows = list(doc.get("transactions", []))
     rows.sort(key=lambda x: (str(x.get("date", "")), str(x.get("time", ""))), reverse=True)
-
     labels = {
-        "deposit": "Einzahlung",
-        "withdrawal": "Auszahlung",
-        "buy": "Kauf",
-        "sell": "Verkauf",
-        "dividend": "Dividende",
-        "fee": "Gebühr",
-        "other": "Sonstige",
+        "deposit": "Einzahlung", "withdrawal": "Auszahlung", "buy": "Kauf",
+        "sell": "Verkauf", "dividend": "Dividende", "fee": "Gebühr", "other": "Sonstige",
     }
-
     if not rows:
         body = '<div class="card"><div class="muted">Noch keine Transaktionen erfasst.</div></div>'
     else:
@@ -78,26 +71,21 @@ def transaction_section() -> str:
                 f'<td style="text-align:left"><span class="pill">{escape(labels.get(kind, kind))}</span></td>'
                 f'<td style="text-align:left">{security_html}</td>'
                 f'<td>{fmt_number(item.get("quantity"), 6)}</td>'
-                f'<td>{price_html}</td>'
-                f'<td>{amount_html}</td>'
-                f'<td>{fees_html}</td>'
+                f'<td>{price_html}</td><td>{amount_html}</td><td>{fees_html}</td>'
                 f'<td style="text-align:left;white-space:normal;min-width:180px">{note}</td>'
                 "</tr>"
             )
         body = (
             '<div class="card"><div class="table-wrap" style="max-height:none">'
-            '<table><thead><tr>'
-            '<th style="text-align:left">Datum</th><th style="text-align:left">Art</th>'
-            '<th style="text-align:left">Wertpapier</th><th>Stück</th><th>Kurs</th>'
-            '<th>Betrag</th><th>Gebühren</th><th style="text-align:left">Details</th>'
-            '</tr></thead><tbody>' + "".join(table_rows) + '</tbody></table></div></div>'
+            '<table><thead><tr><th style="text-align:left">Datum</th><th style="text-align:left">Art</th>'
+            '<th style="text-align:left">Wertpapier</th><th>Stück</th><th>Kurs</th><th>Betrag</th>'
+            '<th>Gebühren</th><th style="text-align:left">Details</th></tr></thead><tbody>'
+            + "".join(table_rows) + '</tbody></table></div></div>'
         )
-
     return (
         '<section id="transactions" class="page">\n'
         ' <div class="header"><div><h1>Transaktionen</h1></div></div>\n'
-        f' {body}\n'
-        '</section>'
+        f' {body}\n</section>'
     )
 
 
@@ -108,37 +96,30 @@ def synchronize_transactions(text: str) -> str:
         if risk_button not in text:
             raise SystemExit("Risk navigation button not found")
         text = text.replace(risk_button, risk_button + "\n    " + transaction_button, 1)
-
     section = transaction_section()
     pattern = r'<section id="transactions" class="page(?: active)?">.*?</section>'
     if re.search(pattern, text, flags=re.S):
-        text = re.sub(pattern, section, text, count=1, flags=re.S)
-    else:
-        if "</main>" not in text:
-            raise SystemExit("Main closing tag not found")
-        text = text.replace("</main>", section + "\n</main>", 1)
-    return text
+        return re.sub(pattern, section, text, count=1, flags=re.S)
+    if "</main>" not in text:
+        raise SystemExit("Main closing tag not found")
+    return text.replace("</main>", section + "\n</main>", 1)
 
 
-def synchronize_latest_direct_positions(text: str) -> str:
-    summary = (
-        '<p><b>Neue Direktpositionen (28.08.2026):</b> Amazon.com Inc. und Schneider Electric SE '
-        'wurden mit jeweils 2 Stück in Depot 2 aufgenommen. Marvell Technology und Broadcom bleiben '
-        'als direkte Aktienpositionen berücksichtigt. Depotstruktur, Länderzuordnung und '
-        'Look-through-Auswertung basieren auf den aktuellen Beständen.</p>'
+def synchronize_portfolio_change_summary(text: str) -> str:
+    # Remove the now-obsolete direct-position paragraph from the summary card.
+    text = re.sub(
+        r'\s*<p><b>Neue Direktpositionen(?: gegenüber dem Juli-Datensatz| \(28\.08\.2026\))?:</b>.*?</p>',
+        '', text, count=1, flags=re.S,
     )
-    pattern = r'<p><b>Neue Direktpositionen(?: gegenüber dem Juli-Datensatz| \(28\.08\.2026\))?:</b>.*?</p>'
-    if not re.search(pattern, text, flags=re.S):
-        raise SystemExit("Direct-position summary paragraph not found")
-    text = re.sub(pattern, summary, text, count=1, flags=re.S)
 
+    # Keep direct-country metadata complete.
     countries_match = re.search(r"const directCountries=\[([^\]]*)\];", text)
     if not countries_match:
         raise SystemExit("Direct-country list not found")
     countries = countries_match.group(1)
     if "name:'FR'" not in countries:
-        updated_countries = countries + ("," if countries.strip() else "") + "{name:'FR',value:0}"
-        text = text[:countries_match.start(1)] + updated_countries + text[countries_match.end(1):]
+        updated = countries + ("," if countries.strip() else "") + "{name:'FR',value:0}"
+        text = text[:countries_match.start(1)] + updated + text[countries_match.end(1):]
 
     map_match = re.search(r"const directMap=\{([^}]*)\};", text)
     if not map_match:
@@ -146,18 +127,43 @@ def synchronize_latest_direct_positions(text: str) -> str:
     entries = map_match.group(1)
     additions = []
     for key, country in (
-        ("Amazon.com Inc.", "US"),
-        ("Amazon", "US"),
-        ("Schneider Electric SE", "FR"),
-        ("Schneider Electric", "FR"),
+        ("Amazon.com Inc.", "US"), ("Amazon", "US"),
+        ("Schneider Electric SE", "FR"), ("Schneider Electric", "FR"),
     ):
         token = f"'{key}':'{country}'"
         if token not in entries:
             additions.append(token)
     if additions:
-        updated_entries = entries + ("," if entries.strip() else "") + ",".join(additions)
-        text = text[:map_match.start(1)] + updated_entries + text[map_match.end(1):]
+        updated = entries + ("," if entries.strip() else "") + ",".join(additions)
+        text = text[:map_match.start(1)] + updated + text[map_match.end(1):]
 
+    # Color only the daily result: positive = bold green, otherwise bold red.
+    old_decl = "const oldTotal=DATA.meta.previousTotal, newTotal=DATA.meta.total;"
+    new_decl = (
+        "const oldTotal=DATA.meta.previousTotal, newTotal=DATA.meta.total;\n"
+        "const dailyChange=newTotal-oldTotal;\n"
+        "const dailyPct=oldTotal?dailyChange/oldTotal:null;\n"
+        "const dailyTone=dailyChange>0?'var(--theme-positive)':'var(--theme-negative)';"
+    )
+    if old_decl in text:
+        text = text.replace(old_decl, new_decl, 1)
+    elif "const dailyChange=newTotal-oldTotal;" not in text:
+        raise SystemExit("Daily change declaration not found")
+
+    old_line = (
+        ' <p><b>Änderung zum letzten Tag:</b> von ${eur.format(oldTotal)} auf ${eur.format(newTotal)} – '
+        '<b>${eur.format(newTotal-oldTotal)} (${oldTotal?((newTotal-oldTotal)>=0?\'+\':\'\')+pct.format((newTotal-oldTotal)/oldTotal):\'–\'})</b>. '
+        '&nbsp; <b>Gesamte Änderung seit Beginn:</b> <b>${eur.format(historyGain)} (${historyPct==null?\'–\':(historyGain>=0?\'+\':\'\')+pct.format(historyPct)})</b>.</p>'
+    )
+    new_line = (
+        ' <p><b>Änderung zum letzten Tag:</b> von ${eur.format(oldTotal)} auf ${eur.format(newTotal)} – '
+        '<b style="color:${dailyTone};font-weight:800">${eur.format(dailyChange)} (${dailyPct==null?\'–\':(dailyChange>=0?\'+\':\'\')+pct.format(dailyPct)})</b>. '
+        '&nbsp; <b>Gesamte Änderung seit Beginn:</b> <b>${eur.format(historyGain)} (${historyPct==null?\'–\':(historyGain>=0?\'+\':\'\')+pct.format(historyPct)})</b>.</p>'
+    )
+    if old_line in text:
+        text = text.replace(old_line, new_line, 1)
+    elif 'style="color:${dailyTone};font-weight:800"' not in text:
+        raise SystemExit("Daily change summary line not found")
     return text
 
 
@@ -175,21 +181,19 @@ def main() -> int:
         text = re.sub(r'<div class="sub">\s*Look-through Dashboard\s*·?\s*(.*?)</div>', r'<div class="sub">\1</div>', text, count=1, flags=re.S)
 
     text = synchronize_transactions(text)
-    text = synchronize_latest_direct_positions(text)
+    text = synchronize_portfolio_change_summary(text)
 
     sidebar = re.search(r'<div class="sub">.*?</div>', text, flags=re.S)
     if not sidebar:
         raise SystemExit("Sidebar status element missing")
     if "Look-through Dashboard" in sidebar.group(0):
         raise SystemExit("Sidebar label removal failed")
-    if "Fortlaufende Entwicklung des Depotwerts über alle dokumentierten Stichtage" in text:
-        raise SystemExit("History subtitle removal failed")
-    if "Die Rangfolge basiert auf der Veränderung des Positionswerts" in text:
-        raise SystemExit("Movers explanatory notice removal failed")
+    if "Neue Direktpositionen (28.08.2026)" in text:
+        raise SystemExit("Obsolete direct-position summary still present")
+    if 'style="color:${dailyTone};font-weight:800"' not in text:
+        raise SystemExit("Daily change color styling missing")
     if 'data-page="transactions"' not in text or 'id="transactions"' not in text:
         raise SystemExit("Transactions page synchronization failed")
-    if "Neue Direktpositionen (28.08.2026)" not in text or "Amazon.com Inc." not in text or "Schneider Electric SE" not in text:
-        raise SystemExit("Latest direct-position summary synchronization failed")
     if "name:'FR'" not in text or "'Amazon.com Inc.':'US'" not in text or "'Schneider Electric SE':'FR'" not in text:
         raise SystemExit("Latest direct-country synchronization failed")
 
@@ -203,5 +207,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
-# Manual production refresh trigger: 2026-09-07
