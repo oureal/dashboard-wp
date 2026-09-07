@@ -126,16 +126,21 @@ def main():
     text = re.sub(r'<div class="history-card-head"><h3>Stichtagsvergleich</h3>.*?</div></div>|<h3>Stichtagsvergleich</h3>', RIGHT_CONTROLS, text, count=1, flags=re.S)
 
     old_note = "<p><b>Gesamtwert:</b> von ${eur.format(oldTotal)} auf ${eur.format(newTotal)} – eine Veränderung von <b>${eur.format(historyGain)} (${historyGain>=0?'+':''}${pct.format(historyPct)})</b>.</p>"
-    new_note = "<p><b>Änderung zum letzten Tag:</b> von ${eur.format(oldTotal)} auf ${eur.format(newTotal)} – <b>${eur.format(newTotal-oldTotal)} (${oldTotal?((newTotal-oldTotal)>=0?'+':'')+pct.format((newTotal-oldTotal)/oldTotal):'–'})</b>. &nbsp; <b>Gesamte Änderung seit Beginn:</b> <b>${eur.format(historyGain)} (${historyPct==null?'–':(historyGain>=0?'+':'')+pct.format(historyPct)})</b>.</p>"
-    if old_note in text: text = text.replace(old_note, new_note, 1)
-    elif new_note not in text: raise ValueError('Could not locate portfolio change summary')
+    legacy_note = "<p><b>Änderung zum letzten Tag:</b> von ${eur.format(oldTotal)} auf ${eur.format(newTotal)} – <b>${eur.format(newTotal-oldTotal)} (${oldTotal?((newTotal-oldTotal)>=0?'+':'')+pct.format((newTotal-oldTotal)/oldTotal):'–'})</b>. &nbsp; <b>Gesamte Änderung seit Beginn:</b> <b>${eur.format(historyGain)} (${historyPct==null?'–':(historyGain>=0?'+':'')+pct.format(historyPct)})</b>.</p>"
+    styled_note = "<p><b>Änderung zum letzten Tag:</b> von ${eur.format(oldTotal)} auf ${eur.format(newTotal)} – <b style=\"color:${dailyTone};font-weight:800\">${eur.format(dailyChange)} (${dailyPct==null?'–':(dailyChange>=0?'+':'')+pct.format(dailyPct)})</b>. &nbsp; <b>Gesamte Änderung seit Beginn:</b> <b>${eur.format(historyGain)} (${historyPct==null?'–':(historyGain>=0?'+':'')+pct.format(historyPct)})</b>.</p>"
+    if old_note in text:
+        text = text.replace(old_note, styled_note, 1)
+    elif legacy_note in text:
+        text = text.replace(legacy_note, styled_note, 1)
+    elif styled_note not in text:
+        raise ValueError('Could not locate portfolio change summary')
 
     if text.count(SCRIPT_START) != 1 or text.count(SCRIPT_END) != 1: raise ValueError('History UI script markers are not unique')
     if text.count("const chartHistory=DATA.history;") != 1: raise ValueError('History UI JavaScript block duplicated')
     if 'Die Historie umfasst <b>Depot 1 und Depot 2</b>' in text: raise ValueError('Legacy history notice was not removed')
 
     INDEX.write_text(text, encoding='utf-8')
-    print('Updated history UI idempotently and removed the history notice.')
+    print('Updated history UI idempotently and preserved styled daily change.')
 
 
 if __name__ == '__main__':
