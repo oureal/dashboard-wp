@@ -139,3 +139,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+# Redeploy trigger: 2026-09-08 19:55 Europe/Vienna
