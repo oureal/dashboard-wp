@@ -98,7 +98,10 @@ def main() -> int:
         assert period.get("gainers") or period.get("losers"), f"No mover rows for {key}"
     assert len(security_history) >= 2, "Security history needs at least two snapshots"
     require_dom_id(html, "moversGrid")
-    require_dom_id(html, "moversAsOf")
+    movers_section = re.search(r'<section id="movers" class="page(?: active)?">.*?</section>', html, flags=re.S)
+    assert movers_section and '<div class="badge" id="moversAsOf"></div>' not in movers_section.group(0), "Movers top-right status badge returned"
+    dashboard_section = re.search(r'<section id="dashboard" class="page(?: active)?">.*?</section>', html, flags=re.S)
+    assert dashboard_section and not re.search(r'<div class="badge">Datenstand .*?</div>', dashboard_section.group(0)), "Dashboard top-right status badge returned"
 
     assert len(depot1) == 199 and len(depot2) == 240
     assert "442 Vorgänge" in html
