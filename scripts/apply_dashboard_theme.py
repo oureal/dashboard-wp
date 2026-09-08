@@ -64,16 +64,15 @@ tr:hover td{background:var(--theme-table-row)}
 .donut-callout .name-label{fill:var(--theme-muted)}
 .history-switch button{background:var(--theme-input);color:var(--theme-text);border-color:var(--theme-line)}
 .history-switch button.active{background:#3579d6;color:#fff}
-.theme-toggle{position:fixed;right:18px;top:18px;z-index:1000;display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border:1px solid var(--theme-line);border-radius:999px;background:var(--theme-panel);color:var(--theme-text);box-shadow:var(--theme-shadow);cursor:pointer;font-weight:750;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.sub{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.theme-toggle{position:static;display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid var(--theme-line);border-radius:999px;background:var(--theme-panel);color:var(--theme-text);box-shadow:none;cursor:pointer;font-weight:750;vertical-align:middle}
 .theme-toggle:hover{transform:translateY(-1px)}
 .theme-toggle:focus-visible{outline:3px solid rgba(53,121,214,.35);outline-offset:2px}
-.theme-toggle-icon{font-size:16px;line-height:1}.theme-toggle-label{font-size:12px;white-space:nowrap}
+.theme-toggle-icon{font-size:15px;line-height:1}.theme-toggle-label{font-size:11px;white-space:nowrap}
 html[data-theme="light"] .tile{border-color:rgba(255,255,255,.72)}
 html[data-theme="light"] .card{box-shadow:0 10px 30px rgba(41,72,112,.09)}
 html[data-theme="light"] .kpi .value{color:#13213a}
 html[data-theme="light"] a{color:#236bb2}
-@media(max-width:1000px){.theme-toggle{top:12px;right:12px}.brand{padding-right:116px}}
-@media(max-width:650px){.theme-toggle{top:9px;right:9px;padding:8px 10px}.theme-toggle-label{font-size:11px}.brand{padding-right:108px}}
 /* dashboard-theme-v1:end */'''
 
 SCRIPT = r'''// dashboard-theme-v1:start
@@ -108,7 +107,9 @@ SCRIPT = r'''// dashboard-theme-v1:start
       sync(button);
       window.dispatchEvent(new CustomEvent('dashboard-theme-change', {detail:{theme:next}}));
     });
-    document.body.appendChild(button);
+    const status = document.querySelector('.sidebar .sub') || document.querySelector('.sub');
+    if (status) status.appendChild(button);
+    else document.body.appendChild(button);
     sync(button);
   }
 
