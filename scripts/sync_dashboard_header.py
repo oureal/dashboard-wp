@@ -165,6 +165,20 @@ def synchronize_portfolio_change_summary(text: str) -> str:
     return text
 
 
+def remove_page_status_badges(text: str) -> str:
+    # Pages 2 and 3 already have the global data timestamp in the sidebar.
+    # Keep their headers clean by removing the redundant top-right status/date badges.
+    text = re.sub(
+        r'(<section id="movers" class="page(?: active)?">\s*<div class="header"><div>.*?</div>)<div class="badge" id="moversAsOf"></div>(</div>)',
+        r'\1\2', text, count=1, flags=re.S,
+    )
+    text = re.sub(
+        r'(<section id="dashboard" class="page(?: active)?">\s*<div class="header"><div>.*?</div>)<div class="badge">Datenstand .*?</div>(</div>)',
+        r'\1\2', text, count=1, flags=re.S,
+    )
+    return text
+
+
 def main() -> int:
     text = INDEX.read_text()
     original = text
@@ -180,6 +194,7 @@ def main() -> int:
 
     text = synchronize_transactions(text)
     text = synchronize_portfolio_change_summary(text)
+    text = remove_page_status_badges(text)
 
     sidebar = re.search(r'<div class="sub">.*?</div>', text, flags=re.S)
     if not sidebar:
@@ -194,6 +209,11 @@ def main() -> int:
         raise SystemExit("Transactions page synchronization failed")
     if "name:'FR'" not in text or "'Amazon.com Inc.':'US'" not in text or "'Schneider Electric SE':'FR'" not in text:
         raise SystemExit("Latest direct-country synchronization failed")
+    if '<div class="badge" id="moversAsOf"></div>' in text:
+        raise SystemExit("Movers status badge removal failed")
+    dashboard_section = re.search(r'<section id="dashboard" class="page(?: active)?">.*?</section>', text, flags=re.S)
+    if dashboard_section and re.search(r'<div class="badge">Datenstand .*?</div>', dashboard_section.group(0)):
+        raise SystemExit("Dashboard status badge removal failed")
 
     if text != original:
         INDEX.write_text(text)
@@ -206,4 +226,4 @@ def main() -> int:
 if __name__ == "__main__":
     raise SystemExit(main())
 
-# Manual production refresh trigger: 2026-09-08 19:44 Europe/Vienna
+# Manual production refresh trigger: 2026-09-08 20:04 Europe/Vienna
