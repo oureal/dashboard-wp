@@ -106,13 +106,11 @@ def synchronize_transactions(text: str) -> str:
 
 
 def synchronize_portfolio_change_summary(text: str) -> str:
-    # Remove the now-obsolete direct-position paragraph from the summary card.
     text = re.sub(
         r'\s*<p><b>Neue Direktpositionen(?: gegenüber dem Juli-Datensatz| \(28\.08\.2026\))?:</b>.*?</p>',
         '', text, count=1, flags=re.S,
     )
 
-    # Keep direct-country metadata complete.
     countries_match = re.search(r"const directCountries=\[([^\]]*)\];", text)
     if not countries_match:
         raise SystemExit("Direct-country list not found")
@@ -137,7 +135,6 @@ def synchronize_portfolio_change_summary(text: str) -> str:
         updated = entries + ("," if entries.strip() else "") + ",".join(additions)
         text = text[:map_match.start(1)] + updated + text[map_match.end(1):]
 
-    # Color only the daily result: positive = bold green, otherwise bold red.
     old_decl = "const oldTotal=DATA.meta.previousTotal, newTotal=DATA.meta.total;"
     new_decl = (
         "const oldTotal=DATA.meta.previousTotal, newTotal=DATA.meta.total;\n"
@@ -145,10 +142,11 @@ def synchronize_portfolio_change_summary(text: str) -> str:
         "const dailyPct=oldTotal?dailyChange/oldTotal:null;\n"
         "const dailyTone=dailyChange>0?'var(--theme-positive)':'var(--theme-negative)';"
     )
-    if old_decl in text:
-        text = text.replace(old_decl, new_decl, 1)
-    elif "const dailyChange=newTotal-oldTotal;" not in text:
-        raise SystemExit("Daily change declaration not found")
+    if "const dailyChange=newTotal-oldTotal;" not in text:
+        if old_decl in text:
+            text = text.replace(old_decl, new_decl, 1)
+        else:
+            raise SystemExit("Daily change declaration not found")
 
     old_line = (
         ' <p><b>Änderung zum letzten Tag:</b> von ${eur.format(oldTotal)} auf ${eur.format(newTotal)} – '
@@ -208,4 +206,4 @@ def main() -> int:
 if __name__ == "__main__":
     raise SystemExit(main())
 
-# Manual production refresh trigger: 2026-09-08 19:39 Europe/Vienna
+# Manual production refresh trigger: 2026-09-08 19:44 Europe/Vienna
