@@ -49,29 +49,42 @@ def test_holdings_retain_two_separate_depots():
 
 
 def test_confirmed_quantities_and_identifiers_are_complete():
-    confirmed = {
+    legacy_confirmed = {
         "xetra-gold": ("62", "DE000A0S9GB0", "A0S9GB"),
-        "boerse-de-aktienfonds": ("164", "LU2115464500", "A2PZMR"),
+        "boerse-de-aktienfonds": ("64", "LU2115464500", "A2PZMR"),
         "ishares-global-titans-50": ("121", "DE0006289382", "628938"),
-        "boerse-de-technologiefonds": ("32", "LU2479335734", "TMG4TT"),
         "ishares-core-msci-world": ("27", "IE00B4L5Y983", "A0RPWH"),
         "ishares-msci-world-value-factor": ("17", "IE00BP3QZB59", "A12ATG"),
         "wisdomtree-physical-bitcoin": ("60", "GB00BJYDH287", "A3GKGK"),
         "marvell-technology": ("4", "US5738741041", "A3CNLD"),
         "broadcom": ("2", "US11135F1012", "A2JG9Z"),
     }
+    new_confirmed = {
+        "ishares-stoxx-europe-600-acc": ("1300", "DE000A2QP4B6", "A2QP4B"),
+        "vaneck-world-equal-weight": ("185", "NL0010408704", "A12HWR"),
+    }
     holdings = {item["instrument_id"]: item for item in read_csv("data/portfolio/holdings.csv")}
     instruments = {
         item["id"]: item
         for item in json.loads((ROOT / "data/portfolio/instruments.yml").read_text())["instruments"]
     }
-    for instrument_id, (quantity, isin, wkn) in confirmed.items():
+    for instrument_id, (quantity, isin, wkn) in legacy_confirmed.items():
         assert holdings[instrument_id]["quantity"] == quantity
         assert instruments[instrument_id]["isin"] == isin
         assert instruments[instrument_id]["wkn"] == wkn
         assert instruments[instrument_id]["ticker"] is None
         assert instruments[instrument_id]["exchange"] is None
         assert instruments[instrument_id]["price_source"] is None
+    for instrument_id, (quantity, isin, wkn) in new_confirmed.items():
+        assert holdings[instrument_id]["quantity"] == quantity
+        assert instruments[instrument_id]["isin"] == isin
+        assert instruments[instrument_id]["wkn"] == wkn
+        assert instruments[instrument_id]["ticker"]
+        assert instruments[instrument_id]["exchange"]
+        assert instruments[instrument_id]["price_source"] == "yfinance"
+    assert "boerse-de-technologiefonds" not in holdings
+    assert instruments["boerse-de-technologiefonds"]["isin"] == "LU2479335734"
+    assert instruments["boerse-de-technologiefonds"]["wkn"] == "TMG4TT"
 
 
 def test_legacy_unit_price_plausibility_is_reported():
