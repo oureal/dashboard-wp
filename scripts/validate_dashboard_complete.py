@@ -104,16 +104,21 @@ def main() -> int:
     assert dashboard_section and not re.search(r'<div class="badge">Datenstand .*?</div>', dashboard_section.group(0)), "Dashboard top-right status badge returned"
 
     assert len(depot1) == 199 and len(depot2) == 240
-    assert "442 Vorgänge" in html
+    assert "446 Vorgänge" in html
     section = re.search(r'<section id="transactions" class="page">(.*?)</section>', html, flags=re.S)
     assert section, "Transactions section missing"
     tbody = re.search(r'<tbody>(.*?)</tbody>', section.group(1), flags=re.S)
     assert tbody, "Transaction table body missing"
     rendered_rows = tbody.group(1).count("<tr>")
-    assert rendered_rows == 442, f"Expected 442 rendered transaction rows, got {rendered_rows}"
+    assert rendered_rows == 446, f"Expected 446 rendered transaction rows, got {rendered_rows}"
     assert "28.08.2026" in section.group(1) and "+1.000,00 €" in section.group(1), "Confirmed Depot 2 deposit missing"
     assert "Amazon.com Inc." in section.group(1) and "-448,50 €" in section.group(1), "Amazon purchase missing"
     assert "Schneider Electric SE" in section.group(1) and "-613,82 €" in section.group(1), "Schneider Electric purchase missing"
+    assert "09.09.2026" in section.group(1), "9 Sep 2026 transactions missing"
+    assert "iShares STOXX Europe 600 UCITS ETF" in section.group(1) and "-10.142,70 €" in section.group(1), "Europe 600 purchase missing"
+    assert "VanEck World Equal Weight Screened UCITS ETF" in section.group(1) and "-7.914,45 €" in section.group(1), "VanEck purchase missing"
+    assert "boerse.de-Technologiefonds - T EUR ACC" in section.group(1) and "+4.825,60 €" in section.group(1), "Technology fund sale missing"
+    assert "boerse.de-Aktienfonds - V EUR ACC" in section.group(1) and "+13.480,48 €" in section.group(1), "Aktienfonds sale missing"
     assert "Depot 1" in section.group(1) and "Depot 2" in section.group(1)
 
     print(
