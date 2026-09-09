@@ -3,6 +3,7 @@ from pathlib import Path
 import json, html, re
 ROOT=Path(__file__).resolve().parents[1]; INDEX=ROOT/'index.html'; FILES=[ROOT/'data/transactions-depot1.json',ROOT/'data/transactions.json']
 MANUAL_TX=[
+    {"date":"2026-09-09","type":"Auszahlung","name":"Auszahlung","amount_eur":-380.12,"source":"User bestätigt","depot":"depot2"},
     {"date":"2026-09-09","type":"Verkauf","name":"boerse.de-Technologiefonds - T EUR ACC","quantity":32,"price":151.49,"price_currency":"EUR","fees_eur":22.08,"amount_eur":4825.60,"wkn":"TMG4TT","isin":"LU2479335734","source":"User bestätigt","depot":"depot2"},
     {"date":"2026-09-09","type":"Verkauf","name":"boerse.de-Aktienfonds - V EUR ACC","quantity":100,"price":135.25,"price_currency":"EUR","fees_eur":44.52,"amount_eur":13480.48,"wkn":"A2PZMR","isin":"LU2115464500","source":"User bestätigt","depot":"depot2"},
     {"date":"2026-09-09","type":"Kauf","name":"iShares STOXX Europe 600 UCITS ETF (DE) EUR Acc","quantity":1300,"price":7.792,"price_currency":"EUR","fees_eur":13.10,"amount_eur":-10142.70,"wkn":"A2QP4B","isin":"DE000A2QP4B6","source":"User bestätigt","depot":"depot2"},
@@ -56,7 +57,7 @@ def build(tx):
 <!-- TRANSACTIONS_END -->'''
 def main():
     tx=load()
-    if len(tx)!=446:raise SystemExit(f'Expected 446 effective transactions, got {len(tx)}')
+    if len(tx)!=447:raise SystemExit(f'Expected 447 effective transactions, got {len(tx)}')
     text=INDEX.read_text();section=build(tx);pat=r'<!-- TRANSACTIONS_START -->.*?<!-- TRANSACTIONS_END -->'
     if not re.search(pat,text,flags=re.S):raise SystemExit('Transactions section not found')
     text=re.sub(pat,section,text,count=1,flags=re.S)
