@@ -8,10 +8,9 @@ Depot 1,siemens,7,1931.65,275.950000,2026-08-21,2026-07-17-lookthrough.xlsx Dire
 Depot 1,hsbc,97,1713.99,17.670000,2026-08-21,2026-07-17-lookthrough.xlsx Direktbestand; account split derived from 2026-08-20 Ausgangsdepots
 Depot 1,apple,5,1355.50,271.100000,2026-08-21,2026-07-17-lookthrough.xlsx Direktbestand; account split derived from 2026-08-20 Ausgangsdepots
 Depot 1,linde,2,837.20,418.600000,2026-08-21,2026-07-17-lookthrough.xlsx Direktbestand; account split derived from 2026-08-20 Ausgangsdepots
-Depot 2,boerse-de-aktienfonds,164,22556.56,137.540000,2026-08-21,user-confirmed portfolio data 2026-08-24
+Depot 2,boerse-de-aktienfonds,64,8656.00,135.250000,2026-09-09,user-confirmed sale of 100 shares on 2026-09-09; 64 shares remaining
 Depot 2,ishares-global-titans-50,121,13537.48,111.880000,2026-08-21,user-confirmed portfolio data 2026-08-24
 Depot 2,berkshire-hathaway-b,22,9418.20,428.100000,2026-08-21,2026-07-17-lookthrough.xlsx Direktbestand; account split derived from 2026-08-20 Ausgangsdepots
-Depot 2,boerse-de-technologiefonds,32,4884.16,152.630000,2026-08-21,user-confirmed portfolio data 2026-08-24
 Depot 2,nvidia,25,4640.00,185.600000,2026-08-21,2026-07-17-lookthrough.xlsx Direktbestand; account split derived from 2026-08-20 Ausgangsdepots
 Depot 2,amd,9,3602.70,400.300000,2026-08-21,2026-07-17-lookthrough.xlsx Direktbestand; account split derived from 2026-08-20 Ausgangsdepots
 Depot 2,ishares-core-msci-world,27,3407.00,126.185185,2026-08-21,user-confirmed portfolio data 2026-08-24
@@ -26,3 +25,5 @@ Depot 2,broadcom,2,621.70,310.850000,2026-08-21,user-confirmed portfolio data 20
 Depot 2,siemens-energy,4,616.16,154.04,2026-08-21,user-confirmed Depot 2 transaction 2026-08-21
 Depot 2,amazon,2,442.40,221.200000,2026-08-28,user-confirmed Depot 2 purchase 2026-08-28
 Depot 2,schneider-electric,2,605.30,302.650000,2026-08-28,user-confirmed Depot 2 purchase 2026-08-28
+Depot 2,ishares-stoxx-europe-600-acc,1300,10129.60,7.792000,2026-09-09,user-confirmed purchase on 2026-09-09
+Depot 2,vaneck-world-equal-weight,185,7901.35,42.710000,2026-09-09,user-confirmed purchase on 2026-09-09
