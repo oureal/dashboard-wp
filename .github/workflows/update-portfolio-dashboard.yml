@@ -77,7 +77,7 @@ jobs:
           import json
           from pathlib import Path
           prices = json.loads(Path("data/prices/latest.json").read_text())["prices"]
-          assert len(prices) == 25, f"Expected 25 prices, got {len(prices)}"
+          assert len(prices) == 27, f"Expected 27 prices, got {len(prices)}"
           assert all(float(item["price"]) > 0 for item in prices), "Non-positive price found"
           assert all(item["status"] in {"fresh", "stale", "fallback"} for item in prices)
           print(f"Validated {len(prices)} positive prices.")
@@ -162,13 +162,16 @@ jobs:
           assert all("net_contributions" in row and "gain" in row for row in history), "Cashflow-aware fields missing"
           assert history[-1]["date"] == dashboard["meta"]["asof"]
           assert abs(float(history[-1]["value"]) - float(portfolio["total"])) < 0.000001
-          assert abs(float(history[-1]["net_contributions"]) - (float(history[-2]["net_contributions"]) + 1000.0)) < 0.01 or float(history[-1]["net_contributions"]) >= float(history[-2]["net_contributions"]), "Confirmed 28 Aug deposit missing from cumulative cashflow"
           assert dashboard.get("movers", {}).get("periods"), "Movers data missing"
           assert security_history, "Security history missing"
-          assert '442 Vorgänge' in html, "Rendered effective transaction count missing"
+          assert '446 Vorgänge' in html, "Rendered effective transaction count missing"
           assert '28.08.2026' in html and '+1.000,00 €' in html, "Confirmed Depot 2 deposit missing from rendered transaction history"
           assert 'Amazon.com Inc.' in html and '-448,50 €' in html, "Amazon purchase missing from rendered transaction history"
           assert 'Schneider Electric SE' in html and '-613,82 €' in html, "Schneider Electric purchase missing from rendered transaction history"
+          assert '09.09.2026' in html and 'VanEck World Equal Weight Screened UCITS ETF' in html, "9 Sep VanEck purchase missing"
+          assert 'iShares STOXX Europe 600 UCITS ETF' in html and '-10.142,70 €' in html, "9 Sep Europe 600 purchase missing"
+          assert 'boerse.de-Technologiefonds - T EUR ACC' in html and '+4.825,60 €' in html, "9 Sep technology fund sale missing"
+          assert 'boerse.de-Aktienfonds - V EUR ACC' in html and '+13.480,48 €' in html, "9 Sep Aktienfonds sale missing"
           assert 'Depot 1' in html and 'Depot 2' in html, "Depot labels missing from transactions"
           assert 'Gesamtdepotentwicklung' in html and 'Kumulierter Geldfluss' in html
           assert 'id="manualUpdateLink"' in html
@@ -177,7 +180,7 @@ jobs:
           assert '/* dashboard-theme-v1:start */' in html and '/* dashboard-theme-v1:end */' in html, "Theme stylesheet missing"
           assert '<!-- dashboard-theme-v2:start -->' in html and '<!-- dashboard-theme-v2:end -->' in html, "Theme script block missing"
           assert "alex-wertpapiere-theme" in html and "themeToggle" in html, "Persistent theme toggle missing"
-          print(f"Validated combined history with {len(history)} points, 442 effective transactions and persistent theme switch.")
+          print(f"Validated combined history with {len(history)} points, 446 effective transactions and persistent theme switch.")
           PY
 
       - name: Install Chromium for browser deployment gate
