@@ -226,4 +226,4 @@ def main() -> int:
 if __name__ == "__main__":
     raise SystemExit(main())
 
-# Manual production refresh trigger: 2026-09-08 20:04 Europe/Vienna
+# Manual production refresh trigger: 2026-09-10 16:25 Europe/Vienna
