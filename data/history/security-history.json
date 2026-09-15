@@ -684,6 +684,39 @@
         "vaneck-world-equal-weight": 7860.650311
       },
       "source": "current"
+    },
+    {
+      "date": "15.09.2026",
+      "time": "21:39",
+      "values": {
+        "berkshire-hathaway-b": 24547.978157,
+        "xetra-gold": 7400.94017,
+        "allianz": 4446.000061,
+        "microsoft": 3008.234568,
+        "eli-lilly": 1963.502135,
+        "siemens": 1811.599915,
+        "hsbc": 1710.303997,
+        "apple": 1428.926749,
+        "linde": 799.545872,
+        "boerse-de-aktienfonds": 8641.28,
+        "ishares-global-titans-50": 13648.800369,
+        "nvidia": 4586.85372,
+        "amd": 3925.497064,
+        "ishares-core-msci-world": 3396.600082,
+        "alphabet-c": 3243.065589,
+        "micron-technology": 1600.71386,
+        "ishares-msci-world-value-factor": 1204.110031,
+        "wisdomtree-physical-bitcoin": 939.12,
+        "marvell-technology": 767.245294,
+        "tsmc-adr": 718.270314,
+        "broadcom": 588.461599,
+        "siemens-energy": 532.0,
+        "amazon": 429.721811,
+        "schneider-electric": 550.599976,
+        "ishares-stoxx-europe-600-acc": 9942.399693,
+        "vaneck-world-equal-weight": 7807.000141
+      },
+      "source": "current"
     }
   ]
 }
