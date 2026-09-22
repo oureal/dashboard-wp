@@ -2496,6 +2496,14 @@
       "net_contributions": 87092.41,
       "gain": 30131.81,
       "simple_return": 0.34597515
+    },
+    {
+      "date": "22.09.2026",
+      "value": 117634.844164,
+      "validated": true,
+      "net_contributions": 87092.41,
+      "gain": 30542.43,
+      "simple_return": 0.35068992
     }
   ]
 }
