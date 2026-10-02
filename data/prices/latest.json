@@ -3,15 +3,15 @@
   "prices": [
     {
       "instrument_id": "berkshire-hathaway-b",
-      "price": "502.9849853515625",
+      "price": "502.6499938964844",
       "currency": "USD",
       "provider": "yfinance",
       "provider_symbol": "BRK-B",
       "exchange": "NYSE",
       "market_time": "2026-10-02T00:00:00-04:00",
-      "fetched_at": "2026-10-02T19:28:09.976367Z",
+      "fetched_at": "2026-10-02T20:43:03.480490Z",
       "status": "fresh",
-      "valuation_price_eur": "446.6003659033594929066284180"
+      "valuation_price_eur": "446.6045071135522804099175930"
     },
     {
       "instrument_id": "xetra-gold",
@@ -21,7 +21,7 @@
       "provider_symbol": "4GLD.DE",
       "exchange": "XETRA",
       "market_time": "2026-10-02T00:00:00+02:00",
-      "fetched_at": "2026-10-02T19:28:10.530759Z",
+      "fetched_at": "2026-10-02T20:43:04.141780Z",
       "status": "fresh",
       "valuation_price_eur": "118.3499984741211"
     },
@@ -33,33 +33,33 @@
       "provider_symbol": "ALV.DE",
       "exchange": "XETRA",
       "market_time": "2026-10-02T00:00:00+02:00",
-      "fetched_at": "2026-10-02T19:28:10.832042Z",
+      "fetched_at": "2026-10-02T20:43:04.532999Z",
       "status": "fresh",
       "valuation_price_eur": "416.20001220703125"
     },
     {
       "instrument_id": "microsoft",
-      "price": "514.8599853515625",
+      "price": "517.530029296875",
       "currency": "USD",
       "provider": "yfinance",
       "provider_symbol": "MSFT",
       "exchange": "NasdaqGS",
       "market_time": "2026-10-02T00:00:00-04:00",
-      "fetched_at": "2026-10-02T19:28:11.185523Z",
+      "fetched_at": "2026-10-02T20:43:04.822292Z",
       "status": "fresh",
-      "valuation_price_eur": "457.1441783422051274691284180"
+      "valuation_price_eur": "459.8254181978409316023925781"
     },
     {
       "instrument_id": "eli-lilly",
-      "price": "1144.68505859375",
+      "price": "1142.8499755859375",
       "currency": "USD",
       "provider": "yfinance",
       "provider_symbol": "LLY",
       "exchange": "NYSE",
       "market_time": "2026-10-02T00:00:00-04:00",
-      "fetched_at": "2026-10-02T19:28:11.543528Z",
+      "fetched_at": "2026-10-02T20:43:05.245292Z",
       "status": "fresh",
-      "valuation_price_eur": "1016.365857630444234760986328"
+      "valuation_price_eur": "1015.422174970532099339672852"
     },
     {
       "instrument_id": "siemens",
@@ -69,7 +69,7 @@
       "provider_symbol": "SIE.DE",
       "exchange": "XETRA",
       "market_time": "2026-10-02T00:00:00+02:00",
-      "fetched_at": "2026-10-02T19:28:11.877414Z",
+      "fetched_at": "2026-10-02T20:43:05.572012Z",
       "status": "fresh",
       "valuation_price_eur": "276.1000061035156"
     },
@@ -81,33 +81,33 @@
       "provider_symbol": "HBC1.DE",
       "exchange": "XETRA",
       "market_time": "2026-10-02T00:00:00+02:00",
-      "fetched_at": "2026-10-02T19:28:12.239502Z",
+      "fetched_at": "2026-10-02T20:43:05.904306Z",
       "status": "fresh",
       "valuation_price_eur": "16.988000869750977"
     },
     {
       "instrument_id": "apple",
-      "price": "333.2799987792969",
+      "price": "333.69000244140625",
       "currency": "USD",
       "provider": "yfinance",
       "provider_symbol": "AAPL",
       "exchange": "NasdaqGS",
       "market_time": "2026-10-02T00:00:00-04:00",
-      "fetched_at": "2026-10-02T19:28:12.608631Z",
+      "fetched_at": "2026-10-02T20:43:06.438442Z",
       "status": "fresh",
-      "valuation_price_eur": "295.9193091997986153324272394"
+      "valuation_price_eur": "296.4835588951682527710327148"
     },
     {
       "instrument_id": "linde",
-      "price": "479.510009765625",
+      "price": "479.4800109863281",
       "currency": "USD",
       "provider": "yfinance",
       "provider_symbol": "LIN",
       "exchange": "NasdaqGS",
       "market_time": "2026-10-02T00:00:00-04:00",
-      "fetched_at": "2026-10-02T19:28:12.926427Z",
+      "fetched_at": "2026-10-02T20:43:06.804942Z",
       "status": "fresh",
-      "valuation_price_eur": "425.7569352014979854455810547"
+      "valuation_price_eur": "426.0179778723904651821478367"
     },
     {
       "instrument_id": "boerse-de-aktienfonds",
@@ -116,8 +116,8 @@
       "provider": "simple_page",
       "provider_symbol": "LU2115464500",
       "exchange": "Stuttgart (EUWAX)",
-      "market_time": "2026-10-02T19:28:13.376521Z",
-      "fetched_at": "2026-10-02T19:28:13.376521Z",
+      "market_time": "2026-10-02T20:43:07.130486Z",
+      "fetched_at": "2026-10-02T20:43:07.130486Z",
       "status": "fresh",
       "isin": "LU2115464500",
       "valuation_price_eur": "135.68",
@@ -131,7 +131,7 @@
       "provider_symbol": "EXI2.DE",
       "exchange": "XETRA",
       "market_time": "2026-10-02T00:00:00+02:00",
-      "fetched_at": "2026-10-02T19:28:13.711939Z",
+      "fetched_at": "2026-10-02T20:43:07.445857Z",
       "status": "fresh",
       "valuation_price_eur": "118.69999694824219"
     },
@@ -142,8 +142,8 @@
       "provider": "simple_page",
       "provider_symbol": "LU2479335734",
       "exchange": "Stuttgart (EUWAX)",
-      "market_time": "2026-10-02T19:28:14.008498Z",
-      "fetched_at": "2026-10-02T19:28:14.008498Z",
+      "market_time": "2026-10-02T20:43:08.678273Z",
+      "fetched_at": "2026-10-02T20:43:08.678273Z",
       "status": "fresh",
       "isin": "LU2479335734",
       "valuation_price_eur": "156.07",
@@ -151,27 +151,27 @@
     },
     {
       "instrument_id": "nvidia",
-      "price": "233.8498992919922",
+      "price": "233.9499969482422",
       "currency": "USD",
       "provider": "yfinance",
       "provider_symbol": "NVDA",
       "exchange": "NasdaqGS",
       "market_time": "2026-10-02T00:00:00-04:00",
-      "fetched_at": "2026-10-02T19:28:14.307439Z",
+      "fetched_at": "2026-10-02T20:43:08.975243Z",
       "status": "fresh",
-      "valuation_price_eur": "207.6353243770700050052578092"
+      "valuation_price_eur": "207.8645664875985121799587965"
     },
     {
       "instrument_id": "amd",
-      "price": "633.7349853515625",
+      "price": "633.9099731445312",
       "currency": "USD",
       "provider": "yfinance",
       "provider_symbol": "AMD",
       "exchange": "NasdaqGS",
       "market_time": "2026-10-02T00:00:00-04:00",
-      "fetched_at": "2026-10-02T19:28:14.572610Z",
+      "fetched_at": "2026-10-02T20:43:09.266917Z",
       "status": "fresh",
-      "valuation_price_eur": "562.6932902300177429316284180"
+      "valuation_price_eur": "563.2289954207808201936413765"
     },
     {
       "instrument_id": "ishares-core-msci-world",
@@ -181,33 +181,33 @@
       "provider_symbol": "EUNL.DE",
       "exchange": "XETRA",
       "market_time": "2026-10-02T00:00:00+02:00",
-      "fetched_at": "2026-10-02T19:28:14.889299Z",
+      "fetched_at": "2026-10-02T20:43:09.559301Z",
       "status": "fresh",
       "valuation_price_eur": "130.0449981689453"
     },
     {
       "instrument_id": "alphabet-c",
-      "price": "339.81500244140625",
+      "price": "340.3500061035156",
       "currency": "USD",
       "provider": "yfinance",
       "provider_symbol": "GOOG",
       "exchange": "NasdaqGS",
       "market_time": "2026-10-02T00:00:00-04:00",
-      "fetched_at": "2026-10-02T19:28:15.147912Z",
+      "fetched_at": "2026-10-02T20:43:09.822473Z",
       "status": "fresh",
-      "valuation_price_eur": "301.7217389177312754426452637"
+      "valuation_price_eur": "302.4009719838140749900824070"
     },
     {
       "instrument_id": "micron-technology",
-      "price": "1075.030029296875",
+      "price": "1074.8900146484375",
       "currency": "USD",
       "provider": "yfinance",
       "provider_symbol": "MU",
       "exchange": "NasdaqGS",
       "market_time": "2026-10-02T00:00:00-04:00",
-      "fetched_at": "2026-10-02T19:28:15.489867Z",
+      "fetched_at": "2026-10-02T20:43:10.206431Z",
       "status": "fresh",
-      "valuation_price_eur": "954.5191574764612688867431641"
+      "valuation_price_eur": "955.0397513626667490761962891"
     },
     {
       "instrument_id": "ishares-msci-world-value-factor",
@@ -217,59 +217,59 @@
       "provider_symbol": "IS3S.DE",
       "exchange": "XETRA",
       "market_time": "2026-10-02T00:00:00+02:00",
-      "fetched_at": "2026-10-02T19:28:15.795493Z",
+      "fetched_at": "2026-10-02T20:43:10.450704Z",
       "status": "fresh",
       "valuation_price_eur": "71.94999694824219"
     },
     {
       "instrument_id": "wisdomtree-physical-bitcoin",
-      "price": "17.827",
+      "price": "17.861",
       "currency": "EUR",
       "provider": "simple_page",
       "provider_symbol": "WBIT",
       "exchange": "Baader Trading",
       "market_time": "2019-11-26",
-      "fetched_at": "2026-10-02T19:28:16.385473Z",
+      "fetched_at": "2026-10-02T20:43:11.244656Z",
       "status": "fresh",
       "isin": "GB00BJYDH287",
-      "valuation_price_eur": "17.827",
+      "valuation_price_eur": "17.861",
       "source_url": "https://www.onvista.de/derivate/ETCs/166422207-A3GKGK-GB00BJYDH287"
     },
     {
       "instrument_id": "marvell-technology",
-      "price": "273.3900146484375",
+      "price": "272.2900085449219",
       "currency": "USD",
       "provider": "yfinance",
       "provider_symbol": "MRVL",
       "exchange": "NasdaqGS",
       "market_time": "2026-10-02T00:00:00-04:00",
-      "fetched_at": "2026-10-02T19:28:16.672184Z",
+      "fetched_at": "2026-10-02T20:43:11.573256Z",
       "status": "fresh",
-      "valuation_price_eur": "242.7429925984324678058715820"
+      "valuation_price_eur": "241.9296658405874335361138821"
     },
     {
       "instrument_id": "tsmc-adr",
-      "price": "473.2200012207031",
+      "price": "472.7799987792969",
       "currency": "USD",
       "provider": "yfinance",
       "provider_symbol": "TSM",
       "exchange": "NYSE",
       "market_time": "2026-10-02T00:00:00-04:00",
-      "fetched_at": "2026-10-02T19:28:17.007427Z",
+      "fetched_at": "2026-10-02T20:43:11.858881Z",
       "status": "fresh",
-      "valuation_price_eur": "420.1720366468543762175727606"
+      "valuation_price_eur": "420.0650171925736124019830227"
     },
     {
       "instrument_id": "broadcom",
-      "price": "355.3599853515625",
+      "price": "355.1400146484375",
       "currency": "USD",
       "provider": "yfinance",
       "provider_symbol": "AVGO",
       "exchange": "NasdaqGS",
       "market_time": "2026-10-02T00:00:00-04:00",
-      "fetched_at": "2026-10-02T19:28:17.328539Z",
+      "fetched_at": "2026-10-02T20:43:12.183595Z",
       "status": "fresh",
-      "valuation_price_eur": "315.5241291636048148191284180"
+      "valuation_price_eur": "315.5418942092510500261962891"
     },
     {
       "instrument_id": "siemens-energy",
@@ -279,21 +279,21 @@
       "provider_symbol": "ENR.DE",
       "exchange": "XETRA",
       "market_time": "2026-10-02T00:00:00+02:00",
-      "fetched_at": "2026-10-02T19:28:17.930148Z",
+      "fetched_at": "2026-10-02T20:43:12.443553Z",
       "status": "fresh",
       "valuation_price_eur": "145.4199981689453"
     },
     {
       "instrument_id": "amazon",
-      "price": "250.73069763183594",
+      "price": "251.52000427246094",
       "currency": "USD",
       "provider": "yfinance",
       "provider_symbol": "AMZN",
       "exchange": "NasdaqGS",
       "market_time": "2026-10-02T00:00:00-04:00",
-      "fetched_at": "2026-10-02T19:28:18.529183Z",
+      "fetched_at": "2026-10-02T20:43:12.722865Z",
       "status": "fresh",
-      "valuation_price_eur": "222.6237851360838292837590814"
+      "valuation_price_eur": "223.4755175595091803080571890"
     },
     {
       "instrument_id": "schneider-electric",
@@ -303,7 +303,7 @@
       "provider_symbol": "SU.PA",
       "exchange": "Paris",
       "market_time": "2026-10-02T00:00:00+02:00",
-      "fetched_at": "2026-10-02T19:28:18.903382Z",
+      "fetched_at": "2026-10-02T20:43:13.073784Z",
       "status": "fresh",
       "valuation_price_eur": "303.0"
     },
@@ -315,7 +315,7 @@
       "provider_symbol": "EXIE.DE",
       "exchange": "XETRA",
       "market_time": "2026-10-02T00:00:00+02:00",
-      "fetched_at": "2026-10-02T19:28:19.208126Z",
+      "fetched_at": "2026-10-02T20:43:13.302758Z",
       "status": "fresh",
       "valuation_price_eur": "7.622000217437744"
     },
@@ -327,7 +327,7 @@
       "provider_symbol": "TSWE.AS",
       "exchange": "Amsterdam",
       "market_time": "2026-10-02T00:00:00+02:00",
-      "fetched_at": "2026-10-02T19:28:19.569761Z",
+      "fetched_at": "2026-10-02T20:43:13.620966Z",
       "status": "fresh",
       "valuation_price_eur": "43.25"
     }

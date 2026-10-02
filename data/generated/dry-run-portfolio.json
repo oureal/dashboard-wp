@@ -7,10 +7,10 @@
       "depot": "Depot 1",
       "instrument_id": "berkshire-hathaway-b",
       "quantity": 33.0,
-      "price": 502.984985,
+      "price": 502.649994,
       "currency": "USD",
-      "valuation_price_eur": 446.600366,
-      "market_value_eur": 14737.812075,
+      "valuation_price_eur": 446.604507,
+      "market_value_eur": 14737.948735,
       "price_status": "fresh"
     },
     {
@@ -37,20 +37,20 @@
       "depot": "Depot 1",
       "instrument_id": "microsoft",
       "quantity": 7.0,
-      "price": 514.859985,
+      "price": 517.530029,
       "currency": "USD",
-      "valuation_price_eur": 457.144178,
-      "market_value_eur": 3200.009248,
+      "valuation_price_eur": 459.825418,
+      "market_value_eur": 3218.777927,
       "price_status": "fresh"
     },
     {
       "depot": "Depot 1",
       "instrument_id": "eli-lilly",
       "quantity": 2.0,
-      "price": 1144.685059,
+      "price": 1142.849976,
       "currency": "USD",
-      "valuation_price_eur": 1016.365858,
-      "market_value_eur": 2032.731715,
+      "valuation_price_eur": 1015.422175,
+      "market_value_eur": 2030.84435,
       "price_status": "fresh"
     },
     {
@@ -77,20 +77,20 @@
       "depot": "Depot 1",
       "instrument_id": "apple",
       "quantity": 5.0,
-      "price": 333.279999,
+      "price": 333.690002,
       "currency": "USD",
-      "valuation_price_eur": 295.919309,
-      "market_value_eur": 1479.596546,
+      "valuation_price_eur": 296.483559,
+      "market_value_eur": 1482.417794,
       "price_status": "fresh"
     },
     {
       "depot": "Depot 1",
       "instrument_id": "linde",
       "quantity": 2.0,
-      "price": 479.51001,
+      "price": 479.480011,
       "currency": "USD",
-      "valuation_price_eur": 425.756935,
-      "market_value_eur": 851.51387,
+      "valuation_price_eur": 426.017978,
+      "market_value_eur": 852.035956,
       "price_status": "fresh"
     },
     {
@@ -117,30 +117,30 @@
       "depot": "Depot 2",
       "instrument_id": "berkshire-hathaway-b",
       "quantity": 22.0,
-      "price": 502.984985,
+      "price": 502.649994,
       "currency": "USD",
-      "valuation_price_eur": 446.600366,
-      "market_value_eur": 9825.20805,
+      "valuation_price_eur": 446.604507,
+      "market_value_eur": 9825.299156,
       "price_status": "fresh"
     },
     {
       "depot": "Depot 2",
       "instrument_id": "nvidia",
       "quantity": 25.0,
-      "price": 233.849899,
+      "price": 233.949997,
       "currency": "USD",
-      "valuation_price_eur": 207.635324,
-      "market_value_eur": 5190.883109,
+      "valuation_price_eur": 207.864566,
+      "market_value_eur": 5196.614162,
       "price_status": "fresh"
     },
     {
       "depot": "Depot 2",
       "instrument_id": "amd",
       "quantity": 9.0,
-      "price": 633.734985,
+      "price": 633.909973,
       "currency": "USD",
-      "valuation_price_eur": 562.69329,
-      "market_value_eur": 5064.239612,
+      "valuation_price_eur": 563.228995,
+      "market_value_eur": 5069.060959,
       "price_status": "fresh"
     },
     {
@@ -157,20 +157,20 @@
       "depot": "Depot 2",
       "instrument_id": "alphabet-c",
       "quantity": 11.0,
-      "price": 339.815002,
+      "price": 340.350006,
       "currency": "USD",
-      "valuation_price_eur": 301.721739,
-      "market_value_eur": 3318.939128,
+      "valuation_price_eur": 302.400972,
+      "market_value_eur": 3326.410692,
       "price_status": "fresh"
     },
     {
       "depot": "Depot 2",
       "instrument_id": "micron-technology",
       "quantity": 2.0,
-      "price": 1075.030029,
+      "price": 1074.890015,
       "currency": "USD",
-      "valuation_price_eur": 954.519157,
-      "market_value_eur": 1909.038315,
+      "valuation_price_eur": 955.039751,
+      "market_value_eur": 1910.079503,
       "price_status": "fresh"
     },
     {
@@ -197,40 +197,40 @@
       "depot": "Depot 2",
       "instrument_id": "wisdomtree-physical-bitcoin",
       "quantity": 60.0,
-      "price": 17.827,
+      "price": 17.861,
       "currency": "EUR",
-      "valuation_price_eur": 17.827,
-      "market_value_eur": 1069.62,
+      "valuation_price_eur": 17.861,
+      "market_value_eur": 1071.66,
       "price_status": "fresh"
     },
     {
       "depot": "Depot 2",
       "instrument_id": "marvell-technology",
       "quantity": 4.0,
-      "price": 273.390015,
+      "price": 272.290009,
       "currency": "USD",
-      "valuation_price_eur": 242.742993,
-      "market_value_eur": 970.97197,
+      "valuation_price_eur": 241.929666,
+      "market_value_eur": 967.718663,
       "price_status": "fresh"
     },
     {
       "depot": "Depot 2",
       "instrument_id": "tsmc-adr",
       "quantity": 2.0,
-      "price": 473.220001,
+      "price": 472.779999,
       "currency": "USD",
-      "valuation_price_eur": 420.172037,
-      "market_value_eur": 840.344073,
+      "valuation_price_eur": 420.065017,
+      "market_value_eur": 840.130034,
       "price_status": "fresh"
     },
     {
       "depot": "Depot 2",
       "instrument_id": "broadcom",
       "quantity": 2.0,
-      "price": 355.359985,
+      "price": 355.140015,
       "currency": "USD",
-      "valuation_price_eur": 315.524129,
-      "market_value_eur": 631.048258,
+      "valuation_price_eur": 315.541894,
+      "market_value_eur": 631.083788,
       "price_status": "fresh"
     },
     {
@@ -247,10 +247,10 @@
       "depot": "Depot 2",
       "instrument_id": "amazon",
       "quantity": 2.0,
-      "price": 250.730698,
+      "price": 251.520004,
       "currency": "USD",
-      "valuation_price_eur": 222.623785,
-      "market_value_eur": 445.24757,
+      "valuation_price_eur": 223.475518,
+      "market_value_eur": 446.951035,
       "price_status": "fresh"
     },
     {
@@ -285,22 +285,22 @@
     }
   ],
   "cash": 9163.93,
-  "total": 118076.364501,
-  "direct_total": 59427.799783,
+  "total": 118116.193715,
+  "direct_total": 59465.588997,
   "fund_etf_total": 41077.314812,
   "gold": 7337.699905,
-  "bitcoin_etp": 1069.62,
-  "resolved": 82544.094083,
-  "unresolved": 35532.270418,
+  "bitcoin_etp": 1071.66,
+  "resolved": 82581.883298,
+  "unresolved": 35534.310417,
   "companies": [
     {
       "name": "Berkshire Hathaway",
       "sector": "Financials",
-      "direct": 24563.020125,
+      "direct": 24563.247891,
       "indirect": 126.562601,
-      "total": 24689.582725,
+      "total": 24689.810492,
       "sources": {
-        "direct": 24563.020125,
+        "direct": 24563.247891,
         "boerse-de-aktienfonds": 99.878464,
         "ishares-core-msci-world": 26.684137
       }
@@ -308,11 +308,11 @@
     {
       "name": "Nvidia",
       "sector": "Information Technology",
-      "direct": 5190.883109,
+      "direct": 5196.614162,
       "indirect": 1441.714567,
-      "total": 6632.597676,
+      "total": 6638.328729,
       "sources": {
-        "direct": 5190.883109,
+        "direct": 5196.614162,
         "boerse-de-aktienfonds": 108.635958,
         "ishares-global-titans-50": 1145.938543,
         "ishares-core-msci-world": 187.140067
@@ -321,11 +321,11 @@
     {
       "name": "AMD",
       "sector": "Information Technology",
-      "direct": 5064.239612,
+      "direct": 5069.060959,
       "indirect": 135.500081,
-      "total": 5199.739693,
+      "total": 5204.561039,
       "sources": {
-        "direct": 5064.239612,
+        "direct": 5069.060959,
         "boerse-de-aktienfonds": 103.549338,
         "ishares-core-msci-world": 31.950743
       }
@@ -333,11 +333,11 @@
     {
       "name": "Alphabet",
       "sector": "Communication",
-      "direct": 3318.939128,
+      "direct": 3326.410692,
       "indirect": 1350.644761,
-      "total": 4669.583889,
+      "total": 4677.055453,
       "sources": {
-        "direct": 3318.939128,
+        "direct": 3326.410692,
         "boerse-de-aktienfonds": 100.258477,
         "ishares-global-titans-50": 1105.730173,
         "ishares-core-msci-world": 144.656112
@@ -346,11 +346,11 @@
     {
       "name": "Microsoft",
       "sector": "Information Technology",
-      "direct": 3200.009248,
+      "direct": 3218.777927,
       "indirect": 1332.883703,
-      "total": 4532.892952,
+      "total": 4551.661631,
       "sources": {
-        "direct": 3200.009248,
+        "direct": 3218.777927,
         "boerse-de-aktienfonds": 103.630686,
         "ishares-global-titans-50": 1118.654292,
         "ishares-core-msci-world": 110.598726
@@ -371,11 +371,11 @@
     {
       "name": "Apple",
       "sector": "Information Technology",
-      "direct": 1479.596546,
+      "direct": 1482.417794,
       "indirect": 1568.669211,
-      "total": 3048.265757,
+      "total": 3051.087005,
       "sources": {
-        "direct": 1479.596546,
+        "direct": 1482.417794,
         "boerse-de-aktienfonds": 111.103314,
         "ishares-global-titans-50": 1266.563652,
         "ishares-core-msci-world": 191.002244
@@ -384,11 +384,11 @@
     {
       "name": "Eli Lilly",
       "sector": "Health Care",
-      "direct": 2032.731715,
+      "direct": 2030.84435,
       "indirect": 523.986912,
-      "total": 2556.718627,
+      "total": 2554.831262,
       "sources": {
-        "direct": 2032.731715,
+        "direct": 2030.84435,
         "boerse-de-aktienfonds": 96.876183,
         "ishares-global-titans-50": 390.595593,
         "ishares-core-msci-world": 36.515135
@@ -397,11 +397,11 @@
     {
       "name": "Micron Technology",
       "sector": "Information Technology",
-      "direct": 1909.038315,
+      "direct": 1910.079503,
       "indirect": 198.901934,
-      "total": 2107.940249,
+      "total": 2108.981437,
       "sources": {
-        "direct": 1909.038315,
+        "direct": 1910.079503,
         "ishares-core-msci-world": 37.568456,
         "ishares-msci-world-value-factor": 161.333478
       }
@@ -432,11 +432,11 @@
     {
       "name": "TSMC",
       "sector": "Information Technology",
-      "direct": 840.344073,
+      "direct": 840.130034,
       "indirect": 876.783332,
-      "total": 1717.127406,
+      "total": 1716.913367,
       "sources": {
-        "direct": 840.344073,
+        "direct": 840.130034,
         "boerse-de-aktienfonds": 95.592145,
         "ishares-global-titans-50": 781.191187
       }
@@ -444,11 +444,11 @@
     {
       "name": "Amazon",
       "sector": "Consumer Discretionary",
-      "direct": 445.24757,
+      "direct": 446.951035,
       "indirect": 1232.377566,
-      "total": 1677.625137,
+      "total": 1679.328602,
       "sources": {
-        "direct": 445.24757,
+        "direct": 446.951035,
         "boerse-de-aktienfonds": 102.56424,
         "ishares-global-titans-50": 1035.365525,
         "ishares-core-msci-world": 94.447801
@@ -457,11 +457,11 @@
     {
       "name": "Broadcom",
       "sector": "Information Technology",
-      "direct": 631.048258,
+      "direct": 631.083788,
       "indirect": 815.255918,
-      "total": 1446.304176,
+      "total": 1446.339706,
       "sources": {
-        "direct": 631.048258,
+        "direct": 631.083788,
         "ishares-global-titans-50": 749.598896,
         "ishares-core-msci-world": 65.657021
       }
@@ -469,22 +469,22 @@
     {
       "name": "Marvell Technology Inc",
       "sector": "Information Technology",
-      "direct": 970.97197,
+      "direct": 967.718663,
       "indirect": 6.319927,
-      "total": 977.291898,
+      "total": 974.038591,
       "sources": {
-        "direct": 970.97197,
+        "direct": 967.718663,
         "ishares-core-msci-world": 6.319927
       }
     },
     {
       "name": "Linde",
       "sector": "Materials",
-      "direct": 851.51387,
+      "direct": 852.035956,
       "indirect": 111.436829,
-      "total": 962.950699,
+      "total": 963.472785,
       "sources": {
-        "direct": 851.51387,
+        "direct": 852.035956,
         "ishares-global-titans-50": 101.956938,
         "ishares-core-msci-world": 9.479891
       }
@@ -13279,23 +13279,23 @@
   "sectors": [
     {
       "name": "Financials",
-      "value": 33353.158151
+      "value": 33353.385918
     },
     {
       "name": "Information Technology",
-      "value": 27784.36935
+      "value": 27814.121049
     },
     {
       "name": "Communication",
-      "value": 5762.714654
+      "value": 5770.186218
     },
     {
       "name": "Health Care",
-      "value": 4369.884592
+      "value": 4367.997227
     },
     {
       "name": "Consumer Discretionary",
-      "value": 3307.123722
+      "value": 3308.827187
     },
     {
       "name": "Nicht klassifiziert",
@@ -13307,7 +13307,7 @@
     },
     {
       "name": "Materials",
-      "value": 1203.86067
+      "value": 1204.382755
     },
     {
       "name": "Consumer Staples",
@@ -13329,7 +13329,7 @@
   "sources": [
     {
       "name": "direct",
-      "value": 59427.799677
+      "value": 59465.588892
     },
     {
       "name": "boerse-de-aktienfonds",
@@ -13351,7 +13351,7 @@
   "assets": [
     {
       "name": "berkshire-hathaway-b",
-      "value": 24563.020127
+      "value": 24563.247892
     },
     {
       "name": "xetra-gold",
@@ -13363,11 +13363,11 @@
     },
     {
       "name": "microsoft",
-      "value": 3200.009248
+      "value": 3218.777927
     },
     {
       "name": "eli-lilly",
-      "value": 2032.731715
+      "value": 2030.84435
     },
     {
       "name": "siemens",
@@ -13379,11 +13379,11 @@
     },
     {
       "name": "apple",
-      "value": 1479.596546
+      "value": 1482.417794
     },
     {
       "name": "linde",
-      "value": 851.51387
+      "value": 852.035956
     },
     {
       "name": "boerse-de-aktienfonds",
@@ -13395,11 +13395,11 @@
     },
     {
       "name": "nvidia",
-      "value": 5190.883109
+      "value": 5196.614162
     },
     {
       "name": "amd",
-      "value": 5064.239612
+      "value": 5069.060959
     },
     {
       "name": "ishares-core-msci-world",
@@ -13407,11 +13407,11 @@
     },
     {
       "name": "alphabet-c",
-      "value": 3318.939128
+      "value": 3326.410692
     },
     {
       "name": "micron-technology",
-      "value": 1909.038315
+      "value": 1910.079503
     },
     {
       "name": "ishares-msci-world-value-factor",
@@ -13419,19 +13419,19 @@
     },
     {
       "name": "wisdomtree-physical-bitcoin",
-      "value": 1069.62
+      "value": 1071.66
     },
     {
       "name": "marvell-technology",
-      "value": 970.97197
+      "value": 967.718663
     },
     {
       "name": "tsmc-adr",
-      "value": 840.344073
+      "value": 840.130034
     },
     {
       "name": "broadcom",
-      "value": 631.048258
+      "value": 631.083788
     },
     {
       "name": "siemens-energy",
@@ -13439,7 +13439,7 @@
     },
     {
       "name": "amazon",
-      "value": 445.24757
+      "value": 446.951035
     },
     {
       "name": "schneider-electric",
@@ -13458,9 +13458,9 @@
       "value": 9163.93
     }
   ],
-  "top10": 59642.592078,
-  "top20": 70618.96057,
-  "hhi": 560.555185,
+  "top10": 59681.587558,
+  "top20": 70656.749785,
+  "hhi": 560.456389,
   "validations": {
     "resolved_plus_unresolved_equals_total": true,
     "company_exposures_equal_resolved": true,
