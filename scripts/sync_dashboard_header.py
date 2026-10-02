@@ -91,11 +91,12 @@ def transaction_section() -> str:
 
 def synchronize_transactions(text: str) -> str:
     if 'data-page="transactions"' not in text:
-        risk_button = '<button data-page="risk"><span class="n">7</span>Risiko</button>'
         transaction_button = '<button data-page="transactions"><span class="n">8</span>Transaktionen</button>'
-        if risk_button not in text:
+        risk_pattern = r'(<button\s+data-page="risk"[^>]*>.*?</button>)'
+        match = re.search(risk_pattern, text, flags=re.S)
+        if not match:
             raise SystemExit("Risk navigation button not found")
-        text = text.replace(risk_button, risk_button + "\n    " + transaction_button, 1)
+        text = text[:match.end()] + "\n    " + transaction_button + text[match.end():]
     section = transaction_section()
     pattern = r'<section id="transactions" class="page(?: active)?">.*?</section>'
     if re.search(pattern, text, flags=re.S):
