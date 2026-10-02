@@ -168,7 +168,7 @@ def ensure_core_navigation(text: str) -> str:
         ("risk", "7", "Risiko"),
         ("transactions", "8", "Transaktionen"),
     ]
-    nav_match = re.search(r'<nav class="nav" id="nav">.*?</nav>', text, flags=re.S)
+    nav_match = re.search(r'<nav\\b[^>]*\\bid=["\\\']nav["\\\'][^>]*>.*?</nav>', text, flags=re.S | re.I)
     if not nav_match:
         raise SystemExit("Navigation container missing")
     buttons = []
