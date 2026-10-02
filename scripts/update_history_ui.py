@@ -15,7 +15,7 @@ INDEX = ROOT / 'index.html'
 SCRIPT_START = '/* history-ui-script-v3:start */'
 SCRIPT_END = '/* history-ui-script-v3:end */'
 
-BLOCK = rf'''{SCRIPT_START}
+BLOCK = r'''/* history-ui-script-v3:start */
 const chartHistory=DATA.history;
 const wealthParts=[['Wertpapiere',Math.max(0,Number(DATA.meta.total||0)-Number(DATA.meta.cash||0)-Number(DATA.meta.gold||0)-Number(DATA.meta.bitcoin||0))],['Bitcoin',Number(DATA.meta.bitcoin||0)],['Gold',Number(DATA.meta.gold||0)],['Cash',Number(DATA.meta.cash||0)]];
 const wealthTotal=wealthParts.reduce((s,x)=>s+x[1],0);
