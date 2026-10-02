@@ -235,3 +235,5 @@ if __name__ == "__main__":
 # Manual production refresh trigger: 2026-10-02 final transaction renderer fix
 
 # Manual production refresh trigger: 2026-10-02 final complete validator fix
+
+# Manual production refresh trigger: 2026-10-02 transaction row validator fix
