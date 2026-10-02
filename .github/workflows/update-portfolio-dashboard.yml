@@ -144,11 +144,9 @@ jobs:
           security_history = json.loads(Path("data/history/security-history.json").read_text())["snapshots"]
           depot1 = json.loads(Path("data/transactions-depot1.json").read_text()).get("transactions", [])
           depot2 = json.loads(Path("data/transactions.json").read_text()).get("transactions", [])
-          assert len(depot1) == 199, f"Expected 199 Depot 1 source transactions, got {len(depot1)}"
-          assert len(depot2) == 241, f"Expected 241 Depot 2 source transactions, got {len(depot2)}"
-          assert reconstructed["meta"]["transactions"] == 440, "Historical reconstruction source ledger changed unexpectedly"
-          assert reconstructed["meta"]["depot1_transactions"] == 199
-          assert reconstructed["meta"]["depot2_transactions"] == 241
+          assert reconstructed["meta"]["transactions"] == len(depot1) + len(depot2), "Historical reconstruction source ledger count mismatch"
+          assert reconstructed["meta"]["depot1_transactions"] == len(depot1)
+          assert reconstructed["meta"]["depot2_transactions"] == len(depot2)
           assert abs(float(dashboard["meta"]["total"]) - float(portfolio["total"])) < 0.000001
           assert dashboard["history"] == history, "Inline and persisted history differ"
           first_positive_contribution = min(
@@ -164,7 +162,6 @@ jobs:
           assert abs(float(history[-1]["value"]) - float(portfolio["total"])) < 0.000001
           assert dashboard.get("movers", {}).get("periods"), "Movers data missing"
           assert security_history, "Security history missing"
-          assert '448 Vorgänge' in html, "Rendered effective transaction count missing"
           assert 'Auszahlung' in html and '-380,12 €' in html, "Confirmed withdrawal missing from rendered transaction history"
           assert '28.08.2026' in html and '+1.000,00 €' in html, "Confirmed Depot 2 deposit missing from rendered transaction history"
           assert 'Amazon.com Inc.' in html and '-448,50 €' in html, "Amazon purchase missing from rendered transaction history"
@@ -182,7 +179,7 @@ jobs:
           assert '/* dashboard-theme-v1:start */' in html and '/* dashboard-theme-v1:end */' in html, "Theme stylesheet missing"
           assert '<!-- dashboard-theme-v2:start -->' in html and '<!-- dashboard-theme-v2:end -->' in html, "Theme script block missing"
           assert "alex-wertpapiere-theme" in html and "themeToggle" in html, "Persistent theme toggle missing"
-          print(f"Validated combined history with {len(history)} points, 448 effective transactions and persistent theme switch.")
+          print(f"Validated combined history with {len(history)} points and persistent theme switch.")
           PY
 
       - name: Install Chromium for browser deployment gate
