@@ -79,10 +79,11 @@ def main() -> int:
     assert abs(float(history[-1]["value"]) - float(data["meta"]["total"])) < 1e-6
     assert "dynamic-history-labels-v2" not in html, "Obsolete history KPI override still present"
     assert "Kumulierter Geldfluss" in html, "Cumulative cash-flow wording missing"
+    assert "Ebene 1 · Vermögensstruktur" in html and "Ebene 2 · Entwicklung & Detailanalyse" in html, "Two-level wealth overview missing"
     assert "net_contributions" in html, "Cash-flow series missing from rendered dashboard"
     assert "history-quarter-label" in html and "Q${q}" in html, "Quarter-axis renderer missing"
     assert "checkpointRows" in html and "H${half}" in html, "Checkpoint renderer missing"
-    for element_id in ("historyChart", "historyKpis", "historyBars", "historyRangeControls", "checkpointControls"):
+    for element_id in ("wealthKpis", "wealthDonut", "historyChart", "historyKpis", "historyBars", "historyRangeControls", "checkpointControls"):
         require_dom_id(html, element_id)
     for token in ('data-range="m1"', 'data-range="m6"', 'data-range="y1"', 'data-range="y3"', 'data-range="y5"', 'data-range="max"'):
         assert token in html, f"History range control missing: {token}"
