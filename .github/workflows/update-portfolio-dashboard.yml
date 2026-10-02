@@ -20,7 +20,6 @@ name: Update portfolio dashboard
       - "scripts/validate_dashboard_complete.py"
       - "scripts/validate_data.py"
       - "tests/**"
-      - "index.html"
       - "data/transactions.json"
       - "data/transactions-depot1.json"
       - "data/portfolio/cash.csv"
@@ -84,6 +83,9 @@ jobs:
           print(f"Validated {len(prices)} positive prices.")
           PY
 
+      - name: Compile Python sources
+        run: python -m compileall -q scripts tests
+
       - name: Run regression tests
         run: pytest -q
 
@@ -115,7 +117,10 @@ jobs:
         run: python scripts/update_movers_data.py
 
       - name: Synchronize dashboard shell
-        run: python scripts/sync_dashboard_header.py
+        run: |
+          python scripts/sync_dashboard_header.py
+          python scripts/sync_dashboard_header.py
+          git diff --exit-code -- index.html || { echo "Dashboard shell renderer is not idempotent"; exit 1; }
 
       - name: Render transaction history
         run: python scripts/update_transactions_data.py
