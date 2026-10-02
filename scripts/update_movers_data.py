@@ -232,8 +232,7 @@ def main() -> int:
 
     snaps = normalize(legacy_snapshots() + load_existing() + [current])
     HISTORY.parent.mkdir(parents=True, exist_ok=True)
-    HISTORY.write_text(json.dumps({"schema_version": 2, "snapshots": snaps}, ensure_ascii=False, indent=2) + "
-", encoding="utf-8")
+    HISTORY.write_text(json.dumps({"schema_version": 2, "snapshots": snaps}, ensure_ascii=False, indent=2) + chr(10), encoding="utf-8")
 
     txs = security_transactions()
     periods = {key: ranking(baseline_for(key, snaps, current), current, txs) for key in ("day", "week", "month", "total")}
