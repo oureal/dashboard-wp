@@ -214,7 +214,9 @@ def ranking(base: dict | None, current: dict, txs: list[dict]) -> dict:
 
 
 def patch_movers_ui(text: str) -> str:
-    start = text.find("/* movers-dashboard-v1 */")
+    # The marker also exists in the movers CSS. Patch the JavaScript block,
+    # which is the final marker occurrence in the generated dashboard.
+    start = text.rfind("/* movers-dashboard-v1 */")
     if start < 0:
         raise SystemExit("Movers UI block missing")
     end_marker = "})();"
