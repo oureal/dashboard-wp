@@ -210,12 +210,15 @@ def ranking(base: dict | None, current: dict, txs: list[dict]) -> dict:
 
 
 def patch_movers_ui(text: str) -> str:
-    pattern = re.compile(r"/\* movers-dashboard-v1 \*/
-\(function\(\)\{.*?
-\}\)\(\);", flags=re.S)
-    if not pattern.search(text):
+    start = text.find("/* movers-dashboard-v1 */")
+    if start < 0:
         raise SystemExit("Movers UI block missing")
-    return pattern.sub(MOVERS_UI, text, count=1)
+    end_marker = "})();"
+    end = text.find(end_marker, start)
+    if end < 0:
+        raise SystemExit("Movers UI block end missing")
+    end += len(end_marker)
+    return text[:start] + MOVERS_UI + text[end:]
 
 
 def main() -> int:
