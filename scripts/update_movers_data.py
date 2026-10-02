@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "index.html"
 PORTFOLIO = ROOT / "data/generated/dry-run-portfolio.json"
 PRICES = ROOT / "data/prices/latest.json"
-HISTORY = ROOT / "data/history/security-history.json"
+HISTORY = ROOT / "data/history/security-history.json"\nTX_FILES = [ROOT / "data/transactions-depot1.json", ROOT / "data/transactions.json"]
 LEGACY_DIR = ROOT / "dashboard/history"
 
 NAME_TO_ID = {
@@ -38,7 +38,7 @@ NAME_TO_ID = {
     "Marvell Technology": "marvell-technology",
     "TSMC": "tsmc-adr",
     "Broadcom": "broadcom",
-    "Siemens Energy": "siemens-energy",
+    "Siemens Energy": "siemens-energy",\n    "boerse.de-Aktienfonds - V EUR ACC": "boerse-de-aktienfonds",
 }
 ID_TO_NAME = {v: k for k, v in NAME_TO_ID.items()}
 
@@ -161,20 +161,49 @@ def baseline_for(period: str, snaps: list[dict], current: dict) -> dict | None:
     return previous[0]
 
 
-def ranking(base: dict | None, current: dict) -> dict:
+def security_transactions() -> list[dict]:
+    rows = []
+    for path in TX_FILES:
+        doc = json.loads(path.read_text(encoding="utf-8"))
+        for tx in doc.get("transactions", []):
+            iid = NAME_TO_ID.get(str(tx.get("name", "")).strip())
+            qty = float(tx.get("quantity", 0) or 0)
+            if iid and qty > 0 and tx.get("type") in ("Kauf", "Verkauf"):
+                rows.append({"date": tx["date"], "id": iid, "type": tx["type"], "quantity": qty})
+    return rows
+
+
+def quantity_at(base_date: str, iid: str, current_qty: float, txs: list[dict]) -> float:
+    """Reverse later trades from today's quantity to recover comparable baseline units."""
+    q = current_qty
+    base_dt = datetime.strptime(base_date, "%d.%m.%Y").date()
+    for tx in txs:
+        tx_dt = datetime.strptime(tx["date"], "%Y-%m-%d").date()
+        if tx["id"] != iid or tx_dt <= base_dt:
+            continue
+        q += tx["quantity"] if tx["type"] == "Verkauf" else -tx["quantity"]
+    return q
+
+
+def ranking(base: dict | None, current: dict, txs: list[dict]) -> dict:
     if not base:
         return {"from": None, "to": current["date"], "coverage": 0, "gainers": [], "losers": []}
     rows = []
     for iid, now in current["values"].items():
         before = float(base.get("values", {}).get(iid, 0) or 0)
         now = float(now or 0)
-        if before <= 0 or now <= 0:
+        current_qty = float(current.get("quantities", {}).get(iid, 0) or 0)
+        base_qty = quantity_at(base["date"], iid, current_qty, txs)
+        if before <= 0 or now <= 0 or current_qty <= 0 or base_qty <= 0:
             continue
-        delta = now - before
-        change = delta / before
+        base_price = before / base_qty
+        current_price = now / current_qty
+        change = current_price / base_price - 1
+        # Euro figure is the price-driven effect on the baseline holding, not cash flow from trades.
+        delta = before * change
         rows.append({"id": iid, "name": ID_TO_NAME.get(iid, iid), "pct": change, "value": delta, "current": now, "base": before})
-    gainers = sorted((r for r in rows if r["value"] > 0), key=lambda r: (r["pct"], r["value"]), reverse=True)[:3]
-    losers = sorted((r for r in rows if r["value"] < 0), key=lambda r: (r["pct"], r["value"]))[:3]
+    gainers = sorted((r for r in rows if r["pct"] > 0), key=lambda r: (r["pct"], r["value"]), reverse=True)[:3]
+    losers = sorted((r for r in rows if r["pct"] < 0), key=lambda r: (r["pct"], r["value"]))[:3]
     return {"from": base["date"], "to": current["date"], "coverage": len(rows), "gainers": gainers, "losers": losers}
 
 
@@ -189,7 +218,7 @@ def main() -> int:
     portfolio = json.loads(PORTFOLIO.read_text(encoding="utf-8"))
     prices = json.loads(PRICES.read_text(encoding="utf-8"))
     date, time = current_time(prices)
-    current = {"date": date, "time": time, "values": current_values(portfolio), "source": "current"}
+    values, quantities = current_values(portfolio)\n    current = {"date": date, "time": time, "values": values, "quantities": quantities, "source": "current"}
     if not current["values"]:
         raise SystemExit("Current security values are empty")
 
@@ -197,7 +226,7 @@ def main() -> int:
     HISTORY.parent.mkdir(parents=True, exist_ok=True)
     HISTORY.write_text(json.dumps({"schema_version": 2, "snapshots": snaps}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-    periods = {key: ranking(baseline_for(key, snaps, current), current) for key in ("day", "week", "month", "total")}
+    txs = security_transactions()\n    periods = {key: ranking(baseline_for(key, snaps, current), current, txs) for key in ("day", "week", "month", "total")}
     empty = [key for key, value in periods.items() if not value.get("from") or int(value.get("coverage", 0)) <= 0]
     if empty:
         raise SystemExit(f"Movers have no comparable securities for: {', '.join(empty)}")
