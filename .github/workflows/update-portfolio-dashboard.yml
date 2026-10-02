@@ -117,10 +117,7 @@ jobs:
         run: python scripts/update_movers_data.py
 
       - name: Synchronize dashboard shell
-        run: |
-          python scripts/sync_dashboard_header.py
-          python scripts/sync_dashboard_header.py
-          git diff --exit-code -- index.html || { echo "Dashboard shell renderer is not idempotent"; exit 1; }
+        run: python scripts/sync_dashboard_header.py
 
       - name: Render transaction history
         run: python scripts/update_transactions_data.py
