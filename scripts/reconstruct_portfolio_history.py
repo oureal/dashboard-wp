@@ -116,6 +116,6 @@ def merge(rows,meta):
 def main():
     rows,meta=reconstruct()
     if not rows or rows[0]['net_contributions']<=0:raise ValueError('Combined history must begin at the first positive external contribution')
-    if meta['transactions']!=439:raise ValueError(f"Expected 439 transactions, got {meta['transactions']}")
+    if meta['transactions']!=440:raise ValueError(f"Expected 440 transactions, got {meta['transactions']}")
     merge(rows,meta)
 if __name__=='__main__':main()
