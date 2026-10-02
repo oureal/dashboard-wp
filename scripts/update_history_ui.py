@@ -97,7 +97,9 @@ function bindHistoryControls(){{
  document.querySelectorAll('#checkpointControls button').forEach(btn=>btn.addEventListener('click',()=>{{activeCheckpointMode=btn.dataset.mode;document.querySelectorAll('#checkpointControls button').forEach(b=>b.classList.toggle('active',b===btn));renderHistoryBars();}}));
 }}
 renderHistoryBars();renderHistoryChart();bindHistoryControls();
-{SCRIPT_END}'''
+/* history-ui-script-v3:end */'''
+# BLOCK is a raw template; normalize legacy f-string escapes once at definition time.
+BLOCK = BLOCK.replace('{{', '{').replace('}}', '}')
 
 CONTROLS_CSS = '''
 /* history-period-controls-v1 */
