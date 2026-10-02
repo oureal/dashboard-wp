@@ -66,7 +66,7 @@ MOVERS_UI = r'''/* movers-dashboard-v1 */
 
 def load_inline(path: Path) -> tuple[str, re.Match[str], dict]:
     text = path.read_text(encoding="utf-8")
-    match = re.search(r"const DATA=(\\{.*?\\});" + chr(10), text, flags=re.S)
+    match = re.search(r"const DATA=(\{.*?\});", text, flags=re.S)
     if not match:
         raise SystemExit(f"DATA object missing in {path}")
     return text, match, json.loads(match.group(1))
@@ -90,7 +90,7 @@ def legacy_snapshots() -> list[dict]:
     for path in sorted(LEGACY_DIR.glob("*.html")):
         try:
             _, _, data = load_inline(path)
-        except Exception:
+        except (Exception, SystemExit):
             continue
         date = str(data.get("meta", {}).get("asof", "")).strip()
         if not date:
