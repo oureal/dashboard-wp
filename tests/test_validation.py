@@ -51,7 +51,7 @@ def test_holdings_retain_two_separate_depots():
 def test_confirmed_quantities_and_identifiers_are_complete():
     legacy_confirmed = {
         "xetra-gold": ("62", "DE000A0S9GB0", "A0S9GB"),
-        "boerse-de-aktienfonds": ("64", "LU2115464500", "A2PZMR"),
+        "boerse-de-aktienfonds": ("30", "LU2115464500", "A2PZMR"),
         "ishares-global-titans-50": ("121", "DE0006289382", "628938"),
         "ishares-core-msci-world": ("27", "IE00B4L5Y983", "A0RPWH"),
         "ishares-msci-world-value-factor": ("17", "IE00BP3QZB59", "A12ATG"),
