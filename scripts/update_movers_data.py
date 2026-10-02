@@ -12,7 +12,8 @@ ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "index.html"
 PORTFOLIO = ROOT / "data/generated/dry-run-portfolio.json"
 PRICES = ROOT / "data/prices/latest.json"
-HISTORY = ROOT / "data/history/security-history.json"\nTX_FILES = [ROOT / "data/transactions-depot1.json", ROOT / "data/transactions.json"]
+HISTORY = ROOT / "data/history/security-history.json"
+TX_FILES = [ROOT / "data/transactions-depot1.json", ROOT / "data/transactions.json"]
 LEGACY_DIR = ROOT / "dashboard/history"
 
 NAME_TO_ID = {
@@ -38,7 +39,8 @@ NAME_TO_ID = {
     "Marvell Technology": "marvell-technology",
     "TSMC": "tsmc-adr",
     "Broadcom": "broadcom",
-    "Siemens Energy": "siemens-energy",\n    "boerse.de-Aktienfonds - V EUR ACC": "boerse-de-aktienfonds",
+    "Siemens Energy": "siemens-energy",
+    "boerse.de-Aktienfonds - V EUR ACC": "boerse-de-aktienfonds",
 }
 ID_TO_NAME = {v: k for k, v in NAME_TO_ID.items()}
 
@@ -64,7 +66,8 @@ MOVERS_UI = r'''/* movers-dashboard-v1 */
 
 def load_inline(path: Path) -> tuple[str, re.Match[str], dict]:
     text = path.read_text(encoding="utf-8")
-    match = re.search(r"const DATA=(\{.*?\});\n", text, flags=re.S)
+    match = re.search(r"const DATA=(\{.*?\});
+", text, flags=re.S)
     if not match:
         raise SystemExit(f"DATA object missing in {path}")
     return text, match, json.loads(match.group(1))
@@ -208,7 +211,9 @@ def ranking(base: dict | None, current: dict, txs: list[dict]) -> dict:
 
 
 def patch_movers_ui(text: str) -> str:
-    pattern = re.compile(r"/\* movers-dashboard-v1 \*/\n\(function\(\)\{.*?\n\}\)\(\);", flags=re.S)
+    pattern = re.compile(r"/\* movers-dashboard-v1 \*/
+\(function\(\)\{.*?
+\}\)\(\);", flags=re.S)
     if not pattern.search(text):
         raise SystemExit("Movers UI block missing")
     return pattern.sub(MOVERS_UI, text, count=1)
@@ -218,15 +223,18 @@ def main() -> int:
     portfolio = json.loads(PORTFOLIO.read_text(encoding="utf-8"))
     prices = json.loads(PRICES.read_text(encoding="utf-8"))
     date, time = current_time(prices)
-    values, quantities = current_values(portfolio)\n    current = {"date": date, "time": time, "values": values, "quantities": quantities, "source": "current"}
+    values, quantities = current_values(portfolio)
+    current = {"date": date, "time": time, "values": values, "quantities": quantities, "source": "current"}
     if not current["values"]:
         raise SystemExit("Current security values are empty")
 
     snaps = normalize(legacy_snapshots() + load_existing() + [current])
     HISTORY.parent.mkdir(parents=True, exist_ok=True)
-    HISTORY.write_text(json.dumps({"schema_version": 2, "snapshots": snaps}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    HISTORY.write_text(json.dumps({"schema_version": 2, "snapshots": snaps}, ensure_ascii=False, indent=2) + "
+", encoding="utf-8")
 
-    txs = security_transactions()\n    periods = {key: ranking(baseline_for(key, snaps, current), current, txs) for key in ("day", "week", "month", "total")}
+    txs = security_transactions()
+    periods = {key: ranking(baseline_for(key, snaps, current), current, txs) for key in ("day", "week", "month", "total")}
     empty = [key for key, value in periods.items() if not value.get("from") or int(value.get("coverage", 0)) <= 0]
     if empty:
         raise SystemExit(f"Movers have no comparable securities for: {', '.join(empty)}")
