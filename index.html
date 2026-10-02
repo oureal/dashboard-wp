@@ -203,7 +203,7 @@ html[data-theme="light"] a{color:#236bb2}
     <button data-page="dashboard"><span class="n">3</span>Dashboard</button>
     <button data-page="treemap"><span class="n">4</span>Look-through-Treemap</button>
     <button data-page="sectors"><span class="n">5</span>Branchen</button>
-    <button data-page="regions"><span class="n">6</span>Länder & Währungen</button>
+    <button data-page="regions"><span class="n">6</span>Anlagestruktur</button>
     <button data-page="risk"><span class="n">7</span>Risiko</button>
     <button data-page="transactions"><span class="n">8</span>Transaktionen</button>
   </nav>
@@ -246,12 +246,8 @@ html[data-theme="light"] a{color:#236bb2}
 </section>
 
 <section id="regions" class="page">
- <div class="header"><div><h1>Länder & Währungen</h1><div class="muted">Datenverfügbarkeit der zugrunde liegenden Datei</div></div></div>
- 
- <div class="grid equal" style="margin-top:16px">
-  <div class="card"><h3>Direktbestand nach ISIN-Landcode</h3><div id="directCountries"></div><p class="muted small">Nur direkte Aktien; der zweistellige ISIN-Präfix bezeichnet das Emissionsland und ist nicht immer identisch mit dem wirtschaftlichen Umsatzland.</p></div>
-  <div class="card"><h3>Nicht-Aktien-Bausteine</h3><div id="nonEquity"></div></div>
- </div>
+ <div class="header"><div><h1>Anlagestruktur</h1><div class="muted">Aufteilung des Gesamtvermögens nach Anlageklassen</div></div></div>
+ <div class="card" style="margin-top:16px"><h3>Vermögensbausteine</h3><div id="nonEquity"></div></div>
 </section>
 
 
@@ -444,7 +440,7 @@ document.getElementById('historyNotes').innerHTML=`
 const directCountries=[{name:'US',value:0},{name:'DE',value:0},{name:'GB',value:0},{name:'IE',value:0},{name:'FR',value:0}];
 const directMap={'Berkshire Hathaway':'US','Allianz':'DE','Nvidia':'US','AMD':'US','Alphabet':'US','Micron Technology':'US','Microsoft':'US','Eli Lilly':'US','Siemens':'DE','HSBC':'GB','Apple':'US','Linde':'IE','TSMC':'US','Marvell Technology Inc':'US','Broadcom':'US','Siemens Energy':'DE','Amazon.com Inc.':'US','Amazon':'US','Schneider Electric SE':'FR','Schneider Electric':'FR'};
 DATA.companies.filter(c=>c.direct>0).forEach(c=>{const z=directCountries.find(x=>x.name===directMap[c.name]);if(z)z.value+=c.direct});bars('directCountries',directCountries.sort((a,b)=>b.value-a.value),DATA.meta.directTotal,10);
-bars('nonEquity',DATA.assets.filter(a=>['Xetra Gold','WisdomTree Physical Bitcoin','Bargeld'].includes(a.name)),DATA.meta.total,10);
+bars('nonEquity',[{name:'Wertpapiere',value:Math.max(0,DATA.meta.total-DATA.meta.gold-DATA.meta.bitcoin-DATA.meta.cash)},{name:'Xetra Gold',value:DATA.meta.gold},{name:'WisdomTree Physical Bitcoin',value:DATA.meta.bitcoin},{name:'Bargeld',value:DATA.meta.cash}],DATA.meta.total,10);
 const riskKpis=[['HHI',DATA.meta.hhi.toFixed(0),'Konzentrationsindex'],['Effektive Positionen',DATA.meta.effectiveN.toFixed(1),'aus HHI abgeleitet'],['Top 20',pct.format(DATA.meta.top20/DATA.meta.total),eur.format(DATA.meta.top20)],['Nicht aufgelöst',pct.format(DATA.meta.unresolved/DATA.meta.total),eur.format(DATA.meta.unresolved)]];
 document.getElementById('riskKpis').innerHTML=riskKpis.map(x=>`<div class="card kpi"><div class="label">${x[0]}</div><div class="value">${x[1]}</div><div class="note">${x[2]}</div></div>`).join('');
 const maxCompany=DATA.companies[0].share,top10share=DATA.meta.top10/DATA.meta.total,top20share=DATA.meta.top20/DATA.meta.total,unres=DATA.meta.unresolved/DATA.meta.total;
