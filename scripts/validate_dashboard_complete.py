@@ -104,7 +104,7 @@ def main() -> int:
     assert dashboard_section and not re.search(r'<div class="badge">Datenstand .*?</div>', dashboard_section.group(0)), "Dashboard top-right status badge returned"
 
     assert len(depot1) == 199 and len(depot2) == 241
-    assert "447 Vorgänge" in html
+    assert "448 Vorgänge" in html
     section = re.search(r'<section id="transactions" class="page">(.*?)</section>', html, flags=re.S)
     assert section, "Transactions section missing"
     tbody = re.search(r'<tbody>(.*?)</tbody>', section.group(1), flags=re.S)
