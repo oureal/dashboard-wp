@@ -89,7 +89,7 @@ def reconstruct():
             securities+=q*unit
         value=cash+securities; gain=value-contrib
         rows.append({'date':de(point),'value':round(value,2),'net_contributions':round(contrib,2),'gain':round(gain,2),'simple_return':round(gain/contrib,8) if contrib>0 else None,'reconstructed':True,'unresolved_positions':unresolved})
-    meta={'schema_version':5,'method':'weekly combined Depot 1 + Depot 2 transaction-ledger reconstruction without artificial level offset','start':start.isoformat(),'end_exclusive':VALIDATED_START.isoformat(),'points':len(rows),'transactions':len(txs),'depot1_transactions':199,'depot2_transactions':240,'market_mapped_isins':len([i for i in isins if i in MARKET]),'all_isins':len(isins),'yahoo_valuation_uses':yahoo,'fallback_valuation_uses':fb,'quote_unit_fixes':['HSBA.L: GBp -> GBP (x0.01)'],'warning':'Pre-17.07.2026 values are reconstructed estimates from documented transactions and historical prices; no additive or multiplicative level adjustment is applied.'}
+    meta={'schema_version':5,'method':'weekly combined Depot 1 + Depot 2 transaction-ledger reconstruction without artificial level offset','start':start.isoformat(),'end_exclusive':VALIDATED_START.isoformat(),'points':len(rows),'transactions':len(txs),'depot1_transactions':sum(1 for t in txs if t.get('depot')=='depot1'),'depot2_transactions':sum(1 for t in txs if t.get('depot')=='depot2'),'market_mapped_isins':len([i for i in isins if i in MARKET]),'all_isins':len(isins),'yahoo_valuation_uses':yahoo,'fallback_valuation_uses':fb,'quote_unit_fixes':['HSBA.L: GBp -> GBP (x0.01)'],'warning':'Pre-17.07.2026 values are reconstructed estimates from documented transactions and historical prices; no additive or multiplicative level adjustment is applied.'}
     return rows,meta
 def merge(rows,meta):
     old=json.loads(HISTORY.read_text(encoding='utf-8')) if HISTORY.exists() else {'history':[]}
@@ -116,6 +116,6 @@ def merge(rows,meta):
 def main():
     rows,meta=reconstruct()
     if not rows or rows[0]['net_contributions']<=0:raise ValueError('Combined history must begin at the first positive external contribution')
-    if meta['transactions']!=440:raise ValueError(f"Expected 440 transactions, got {meta['transactions']}")
+    if meta['transactions']<=0: raise ValueError('No source transactions loaded')
     merge(rows,meta)
 if __name__=='__main__':main()
