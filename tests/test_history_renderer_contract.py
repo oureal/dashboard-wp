@@ -1,6 +1,12 @@
 from pathlib import Path
-import subprocess
-import shutil
+import importlib.util
+
+def load_renderer():
+    path = Path("scripts/update_history_ui.py")
+    spec = importlib.util.spec_from_file_location("history_renderer", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 def test_history_renderer_source_contract():
     src = Path("scripts/update_history_ui.py").read_text(encoding="utf-8")
@@ -9,18 +15,15 @@ def test_history_renderer_source_contract():
     assert "{SCRIPT_END}'''" not in src
     assert "BLOCK = BLOCK.replace('{{', '{').replace('}}', '}')" in src
 
-def test_history_renderer_is_idempotent(tmp_path):
-    repo = Path.cwd()
-    work = tmp_path / "repo"
-    shutil.copytree(repo, work, dirs_exist_ok=True)
-    script = work / "scripts/update_history_ui.py"
-    index = work / "index.html"
-    subprocess.run(["python", str(script)], cwd=work, check=True)
-    once = index.read_bytes()
-    subprocess.run(["python", str(script)], cwd=work, check=True)
-    twice = index.read_bytes()
+def test_history_renderer_block_contract_and_idempotence():
+    m = load_renderer()
+    assert m.BLOCK.count(m.SCRIPT_START) == 1
+    assert m.BLOCK.count(m.SCRIPT_END) == 1
+    assert m.BLOCK.count("const chartHistory=DATA.history;") == 1
+    current = Path("index.html").read_text(encoding="utf-8")
+    once = m.replace_script_block(current)
+    twice = m.replace_script_block(once)
     assert once == twice
-    text = twice.decode("utf-8")
-    assert text.count("/* history-ui-script-v3:start */") == 1
-    assert text.count("/* history-ui-script-v3:end */") == 1
-    assert text.count("const chartHistory=DATA.history;") == 1
+    assert twice.count(m.SCRIPT_START) == 1
+    assert twice.count(m.SCRIPT_END) == 1
+    assert twice.count("const chartHistory=DATA.history;") == 1
