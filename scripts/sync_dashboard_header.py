@@ -156,6 +156,29 @@ def remove_page_status_badges(text: str) -> str:
     return text
 
 
+def ensure_core_navigation(text: str) -> str:
+    """Ensure stable page navigation from page ids instead of exact HTML snippets."""
+    labels = [
+        ("history", "1", "Gesamtdepotentwicklung"),
+        ("movers", "2", "Gewinner & Verlierer"),
+        ("dashboard", "3", "Dashboard"),
+        ("treemap", "4", "Look-through-Treemap"),
+        ("sectors", "5", "Branchen"),
+        ("regions", "6", "Anlagestruktur"),
+        ("risk", "7", "Risiko"),
+        ("transactions", "8", "Transaktionen"),
+    ]
+    nav_match = re.search(r'<nav class="nav" id="nav">.*?</nav>', text, flags=re.S)
+    if not nav_match:
+        raise SystemExit("Navigation container missing")
+    buttons = []
+    for page, number, label in labels:
+        active = ' class="active"' if page == "history" else ""
+        buttons.append(f'    <button{active} data-page="{page}"><span class="n">{number}</span>{label}</button>')
+    nav = '<nav class="nav" id="nav">\n' + "\n".join(buttons) + '\n  </nav>'
+    return text[:nav_match.start()] + nav + text[nav_match.end():]
+
+
 def main() -> int:
     text = INDEX.read_text()
     original = text
@@ -169,6 +192,7 @@ def main() -> int:
     else:
         text = re.sub(r'<div class="sub">\s*Look-through Dashboard\s*·?\s*(.*?)</div>', r'<div class="sub">\1</div>', text, count=1, flags=re.S)
 
+    text = ensure_core_navigation(text)
     text = synchronize_transactions(text)
     text = synchronize_portfolio_change_summary(text)
     text = remove_page_status_badges(text)
