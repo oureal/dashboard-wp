@@ -168,15 +168,20 @@ def ensure_core_navigation(text: str) -> str:
         ("risk", "7", "Risiko"),
         ("transactions", "8", "Transaktionen"),
     ]
-    nav_match = re.search(r'<nav\\b[^>]*\\bid=["\\\']nav["\\\'][^>]*>.*?</nav>', text, flags=re.S | re.I)
-    if not nav_match:
+    start = text.find('<nav')
+    if start < 0:
         raise SystemExit("Navigation container missing")
+    open_end = text.find('>', start)
+    end = text.find('</nav>', open_end)
+    if open_end < 0 or end < 0 or 'id="nav"' not in text[start:open_end + 1]:
+        raise SystemExit("Navigation container missing")
+    end += len('</nav>')
     buttons = []
     for page, number, label in labels:
         active = ' class="active"' if page == "history" else ""
         buttons.append(f'    <button{active} data-page="{page}"><span class="n">{number}</span>{label}</button>')
     nav = '<nav class="nav" id="nav">\n' + "\n".join(buttons) + '\n  </nav>'
-    return text[:nav_match.start()] + nav + text[nav_match.end():]
+    return text[:start] + nav + text[end:]
 
 
 def main() -> int:
