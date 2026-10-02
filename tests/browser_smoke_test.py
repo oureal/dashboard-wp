@@ -19,7 +19,7 @@ PAGES = {
     "dashboard": [("#kpis .card", 4), ("#topBars .bar-row", 1), ("#assetLegend .legend-row", 1), ("#assetDonut .donut-segment", 1), ("#assetDonut .donut-callout", 8)],
     "treemap": [("#treemapBox .tile", 1)],
     "sectors": [("#sectorBars .bar-row", 1), ("#sectorLegend .legend-row", 1), ("#sectorDonut .donut-segment", 1), ("#sectorDonut .donut-callout", 8)],
-    "regions": [("#directCountries .bar-row", 1), ("#nonEquity .bar-row", 1)],
+    "regions": [("#nonEquity .bar-row", 4)],
     "risk": [("#riskKpis .card", 4), ("#riskMeters .risk", 1), ("#riskNotes p", 1)],
     "transactions": [("#transactions tbody tr", 440)],
 }
