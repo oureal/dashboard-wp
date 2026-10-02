@@ -176,6 +176,12 @@ def security_transactions() -> list[dict]:
             qty = float(tx.get("quantity", 0) or 0)
             if iid and qty > 0 and tx.get("type") in ("Kauf", "Verkauf"):
                 rows.append({"date": tx["date"], "id": iid, "type": tx["type"], "quantity": qty})
+    # Confirmed 9 Sep transactions are still display-only legacy entries in
+    # update_transactions_data.py. Include the Aktienfonds sale here so a
+    # long-period price comparison reconstructs the correct historical units.
+    manual = {"date": "2026-09-09", "id": "boerse-de-aktienfonds", "type": "Verkauf", "quantity": 100.0}
+    if not any(r == manual for r in rows):
+        rows.append(manual)
     return rows
 
 
