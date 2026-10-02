@@ -219,3 +219,5 @@ if __name__ == "__main__":
 # Production refresh after idempotent history marker fix 2026-10-02
 
 # Production refresh after complete-block history validation fix 2026-10-02
+
+# Production refresh after removing brittle history marker gate 2026-10-02
