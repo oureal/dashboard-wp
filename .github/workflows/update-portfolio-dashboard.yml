@@ -20,6 +20,7 @@ name: Update portfolio dashboard
       - "scripts/validate_dashboard_complete.py"
       - "scripts/validate_data.py"
       - "tests/**"
+      - "index.html"
       - "data/transactions.json"
       - "data/transactions-depot1.json"
       - "data/portfolio/cash.csv"
@@ -34,7 +35,7 @@ permissions:
 
 concurrency:
   group: production-portfolio-update
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   update-portfolio:
