@@ -116,6 +116,19 @@ jobs:
       - name: Refresh security movers history and rankings
         run: python scripts/update_movers_data.py
 
+      - name: Diagnose generated shell before synchronization
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          text = Path("index.html").read_text(encoding="utf-8")
+          print("index.html bytes:", len(text.encode("utf-8")))
+          print("has <nav:", "<nav" in text)
+          print("has id=nav:", 'id="nav"' in text or "id='nav'" in text)
+          print("has data-page history:", 'data-page="history"' in text or "data-page='history'" in text)
+          pos = text.find("<aside")
+          print(text[pos:pos+2500] if pos >= 0 else text[:2500])
+          PY
+
       - name: Synchronize dashboard shell
         run: python scripts/sync_dashboard_header.py
 
