@@ -215,3 +215,5 @@ if __name__ == "__main__":
 # Production refresh after dynamic ledger-count refactor 2026-10-02
 
 # Production refresh after wealth renderer syntax fix 2026-10-02
+
+# Production refresh after idempotent history marker fix 2026-10-02
