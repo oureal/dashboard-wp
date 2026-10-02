@@ -229,3 +229,5 @@ if __name__ == "__main__":
 # Manual production refresh trigger: 2026-09-11 11:22 Europe/Vienna
 
 # Manual production refresh trigger: 2026-10-02 after Aktienfonds validation fix
+
+# Manual production refresh trigger: 2026-10-02 after history count fix
