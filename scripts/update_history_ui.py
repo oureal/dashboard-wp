@@ -12,8 +12,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / 'index.html'
 
-SCRIPT_START = '/* history-ui-script-v3:start */'
-SCRIPT_END = '/* history-ui-script-v3:end */'
+SCRIPT_START = '/* history-ui-script-' + 'v3:start */'
+SCRIPT_END = '/* history-ui-script-' + 'v3:end */'
 
 BLOCK = r'''/* history-ui-script-v3:start */
 const chartHistory=DATA.history;
