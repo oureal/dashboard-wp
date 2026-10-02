@@ -111,30 +111,6 @@ def synchronize_portfolio_change_summary(text: str) -> str:
         '', text, count=1, flags=re.S,
     )
 
-    countries_match = re.search(r"const directCountries=\[([^\]]*)\];", text)
-    if not countries_match:
-        raise SystemExit("Direct-country list not found")
-    countries = countries_match.group(1)
-    if "name:'FR'" not in countries:
-        updated = countries + ("," if countries.strip() else "") + "{name:'FR',value:0}"
-        text = text[:countries_match.start(1)] + updated + text[countries_match.end(1):]
-
-    map_match = re.search(r"const directMap=\{([^}]*)\};", text)
-    if not map_match:
-        raise SystemExit("Direct-country mapping not found")
-    entries = map_match.group(1)
-    additions = []
-    for key, country in (
-        ("Amazon.com Inc.", "US"), ("Amazon", "US"),
-        ("Schneider Electric SE", "FR"), ("Schneider Electric", "FR"),
-    ):
-        token = f"'{key}':'{country}'"
-        if token not in entries:
-            additions.append(token)
-    if additions:
-        updated = entries + ("," if entries.strip() else "") + ",".join(additions)
-        text = text[:map_match.start(1)] + updated + text[map_match.end(1):]
-
     old_decl = "const oldTotal=DATA.meta.previousTotal, newTotal=DATA.meta.total;"
     new_decl = (
         "const oldTotal=DATA.meta.previousTotal, newTotal=DATA.meta.total;\n"
@@ -207,8 +183,6 @@ def main() -> int:
         raise SystemExit("Daily change color styling missing")
     if 'data-page="transactions"' not in text or 'id="transactions"' not in text:
         raise SystemExit("Transactions page synchronization failed")
-    if "name:'FR'" not in text or "'Amazon.com Inc.':'US'" not in text or "'Schneider Electric SE':'FR'" not in text:
-        raise SystemExit("Latest direct-country synchronization failed")
     if '<div class="badge" id="moversAsOf"></div>' in text:
         raise SystemExit("Movers status badge removal failed")
     dashboard_section = re.search(r'<section id="dashboard" class="page(?: active)?">.*?</section>', text, flags=re.S)
