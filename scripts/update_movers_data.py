@@ -115,15 +115,19 @@ def current_time(prices: dict) -> tuple[str, str]:
     return local.strftime("%d.%m.%Y"), local.strftime("%H:%M")
 
 
-def current_values(portfolio: dict) -> dict[str, float]:
+def current_values(portfolio: dict) -> tuple[dict[str, float], dict[str, float]]:
     values: dict[str, float] = {}
+    quantities: dict[str, float] = {}
     for row in portfolio.get("positions", []):
         iid = str(row.get("instrument_id") or "").strip()
         if iid and iid != "cash":
             value = float(row.get("market_value_eur", 0) or 0)
+            quantity = float(row.get("quantity", 0) or 0)
             if value > 0:
                 values[iid] = values.get(iid, 0.0) + value
-    return values
+            if quantity > 0:
+                quantities[iid] = quantities.get(iid, 0.0) + quantity
+    return values, quantities
 
 
 def normalize(points: list[dict]) -> list[dict]:
