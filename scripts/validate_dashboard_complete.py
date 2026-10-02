@@ -110,7 +110,7 @@ def main() -> int:
     tbody = re.search(r'<tbody>(.*?)</tbody>', section.group(1), flags=re.S)
     assert tbody, "Transaction table body missing"
     rendered_rows = tbody.group(1).count("<tr>")
-    assert rendered_rows == 447, f"Expected 447 rendered transaction rows, got {rendered_rows}"
+    assert rendered_rows == 448, f"Expected 448 rendered transaction rows, got {rendered_rows}"
     assert "28.08.2026" in section.group(1) and "+1.000,00 €" in section.group(1), "Confirmed Depot 2 deposit missing"
     assert "Amazon.com Inc." in section.group(1) and "-448,50 €" in section.group(1), "Amazon purchase missing"
     assert "Schneider Electric SE" in section.group(1) and "-613,82 €" in section.group(1), "Schneider Electric purchase missing"
