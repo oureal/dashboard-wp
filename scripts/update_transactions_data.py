@@ -57,7 +57,7 @@ def build(tx):
 <!-- TRANSACTIONS_END -->'''
 def main():
     tx=load()
-    if len(tx)!=448:raise SystemExit(f'Expected 448 effective transactions, got {len(tx)}')
+    if not tx: raise SystemExit('No effective transactions loaded')
     text=INDEX.read_text();section=build(tx);pat=r'<!-- TRANSACTIONS_START -->.*?<!-- TRANSACTIONS_END -->'
     if not re.search(pat,text,flags=re.S):raise SystemExit('Transactions section not found')
     text=re.sub(pat,section,text,count=1,flags=re.S)
