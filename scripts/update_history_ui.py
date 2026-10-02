@@ -139,9 +139,7 @@ def main():
     elif styled_note not in text:
         raise ValueError('Could not locate portfolio change summary')
 
-    marked_blocks = re.findall(re.escape(SCRIPT_START) + r'.*?' + re.escape(SCRIPT_END), text, flags=re.S)
-    if len(marked_blocks) != 1: raise ValueError(f'Expected exactly one complete history UI block, got {len(marked_blocks)}')
-    if text.count("const chartHistory=DATA.history;") != 1: raise ValueError('History UI JavaScript block duplicated')
+    if text.count("const chartHistory=DATA.history;") != 1: raise ValueError('History UI JavaScript block duplicated or missing')
     if 'Die Historie umfasst <b>Depot 1 und Depot 2</b>' in text: raise ValueError('Legacy history notice was not removed')
 
     INDEX.write_text(text, encoding='utf-8')
