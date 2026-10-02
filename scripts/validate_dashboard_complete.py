@@ -20,7 +20,7 @@ PAGES = {
     "dashboard": "Depotübersicht",
     "treemap": "Interaktive Look-through-Treemap",
     "sectors": "Branchenanalyse",
-    "regions": "Länder & Währungen",
+    "regions": "Anlagestruktur",
     "risk": "Risikoanalyse",
     "transactions": "Transaktionen",
 }
@@ -68,7 +68,7 @@ def main() -> int:
     assert data.get("assets"), "Asset allocation data empty"
     assert float(data["meta"]["directTotal"]) > 0
     assert float(data["meta"]["resolved"]) > 0
-    for element_id in ("kpis", "topBars", "assetDonut", "assetLegend", "directIndirect", "resolution", "treemapBox", "companyDetail", "sectorBars", "sectorDonut", "sectorLegend", "sectorCompanies", "directCountries", "nonEquity", "riskKpis", "riskMeters", "overlapList", "riskNotes"):
+    for element_id in ("kpis", "topBars", "assetDonut", "assetLegend", "directIndirect", "resolution", "treemapBox", "companyDetail", "sectorBars", "sectorDonut", "sectorLegend", "sectorCompanies", "nonEquity", "riskKpis", "riskMeters", "overlapList", "riskNotes"):
         require_dom_id(html, element_id)
 
     history = data.get("history", [])
@@ -78,6 +78,8 @@ def main() -> int:
     assert all("net_contributions" in row and "gain" in row for row in history), "Cash-flow fields missing"
     assert abs(float(history[-1]["value"]) - float(data["meta"]["total"])) < 1e-6
     assert "dynamic-history-labels-v2" not in html, "Obsolete history KPI override still present"
+    assert "Direktbestand nach ISIN-Landcode" not in html, "Obsolete country breakdown still present"
+    assert "Vermögensbausteine" in html and "Wertpapiere" in html, "Investment structure summary missing"
     assert "Kumulierter Geldfluss" in html, "Cumulative cash-flow wording missing"
     assert "Ebene 1 · Vermögensstruktur" in html and "Ebene 2 · Entwicklung & Detailanalyse" in html, "Two-level wealth overview missing"
     assert "net_contributions" in html, "Cash-flow series missing from rendered dashboard"
