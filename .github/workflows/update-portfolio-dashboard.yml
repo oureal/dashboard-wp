@@ -25,6 +25,8 @@ name: Update portfolio dashboard
       - "data/portfolio/cash.csv"
       - "data/portfolio/holdings.csv"
       - "data/portfolio/instruments.yml"
+      - "data/portfolio/transactions.csv"
+      - "data/portfolio/manual-dashboard-transactions.json"
       - "data/market-data/yahoo-mappings.yml"
 
 permissions:
@@ -132,6 +134,23 @@ jobs:
       - name: Synchronize dashboard shell
         run: python scripts/sync_dashboard_header.py
 
+      - name: Validate transaction source files
+        run: |
+          python - <<'PY'
+          import csv, json
+          from pathlib import Path
+          list(csv.DictReader(Path("data/portfolio/transactions.csv").open(encoding="utf-8")))
+          manual = json.loads(Path("data/portfolio/manual-dashboard-transactions.json").read_text(encoding="utf-8"))
+          assert isinstance(manual.get("transactions"), list), "Manual dashboard transaction ledger missing"
+          keys=set()
+          for x in manual["transactions"]:
+              assert x.get("date") and x.get("type") and x.get("name") and x.get("depot"), f"Incomplete manual transaction: {x}"
+              key=(x["date"],x["depot"],x["type"],x["name"],float(x.get("amount_eur") or 0))
+              assert key not in keys, f"Duplicate manual transaction: {key}"
+              keys.add(key)
+          print(f"Validated {len(keys)} manual dashboard transactions.")
+          PY
+
       - name: Render transaction history
         run: python scripts/update_transactions_data.py
 
@@ -180,6 +199,7 @@ jobs:
           assert security_history, "Security history missing"
           assert 'Auszahlung' in html and '-380,12 €' in html, "Confirmed withdrawal missing from rendered transaction history"
           assert '28.08.2026' in html and '+1.000,00 €' in html, "Confirmed Depot 2 deposit missing from rendered transaction history"
+          assert '05.10.2026' in html and 'KESt-Verlustausgleich' in html and '+360,10 €' in html, "KESt loss offset missing from rendered transaction history"
           assert 'Amazon.com Inc.' in html and '-448,50 €' in html, "Amazon purchase missing from rendered transaction history"
           assert 'Schneider Electric SE' in html and '-613,82 €' in html, "Schneider Electric purchase missing from rendered transaction history"
           assert '09.09.2026' in html and 'VanEck World Equal Weight Screened UCITS ETF' in html, "9 Sep VanEck purchase missing"
