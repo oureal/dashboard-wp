@@ -28,7 +28,8 @@ PAGES = {
 
 
 def inline_data(html: str) -> dict:
-    match = re.search(r"const DATA=(\{.*?\});\n", html, flags=re.S)
+    match = re.search(r"const DATA=(\{.*?\});
+", html, flags=re.S)
     if not match:
         raise AssertionError("Inline DATA object missing")
     return json.loads(match.group(1))
@@ -119,7 +120,8 @@ def main() -> int:
     expected_rendered = expected_source + manual_effective - source_manual_duplicates
     assert f"{expected_rendered} Vorgänge" in html, "Rendered transaction badge is not derived from the effective ledger"
     assert rendered_rows == expected_rendered, f"Expected {expected_rendered} rendered transaction rows, got {rendered_rows}"
-    assert "28.08.2026" in section.group(1) and "+1.000,00 €" in section.group(1), "Confirmed Depot 2 deposit missing"\n    assert "05.10.2026" in section.group(1) and "KESt-Verlustausgleich" in section.group(1) and "+360,10 €" in section.group(1), "KESt loss offset deposit missing"
+    assert "28.08.2026" in section.group(1) and "+1.000,00 €" in section.group(1), "Confirmed Depot 2 deposit missing"
+    assert "05.10.2026" in section.group(1) and "KESt-Verlustausgleich" in section.group(1) and "+360,10 €" in section.group(1), "KESt loss offset deposit missing"
     assert "Amazon.com Inc." in section.group(1) and "-448,50 €" in section.group(1), "Amazon purchase missing"
     assert "Schneider Electric SE" in section.group(1) and "-613,82 €" in section.group(1), "Schneider Electric purchase missing"
     assert "09.09.2026" in section.group(1), "9 Sep 2026 transactions missing"
