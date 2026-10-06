@@ -28,7 +28,7 @@ PAGES = {
 
 
 def inline_data(html: str) -> dict:
-    match = re.search(r"const DATA=(\\{.*?\\});\\n", html, flags=re.S)
+    match = re.search(r"const DATA=(\{.*?\});\n", html, flags=re.S)
     if not match:
         raise AssertionError("Inline DATA object missing")
     return json.loads(match.group(1))
