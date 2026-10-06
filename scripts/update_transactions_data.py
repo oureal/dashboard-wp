@@ -3,6 +3,7 @@ from pathlib import Path
 import json, html, re
 ROOT=Path(__file__).resolve().parents[1]; INDEX=ROOT/'index.html'; FILES=[ROOT/'data/transactions-depot1.json',ROOT/'data/transactions.json']
 MANUAL_TX=[
+    {"date":"2026-10-05","type":"Einzahlung","name":"KESt-Verlustausgleich","amount_eur":360.10,"source":"User bestätigt","depot":"depot2"},
     {"date":"2026-09-09","type":"Auszahlung","name":"Auszahlung","amount_eur":-380.12,"source":"User bestätigt","depot":"depot2"},
     {"date":"2026-09-09","type":"Verkauf","name":"boerse.de-Technologiefonds - T EUR ACC","quantity":32,"price":151.49,"price_currency":"EUR","fees_eur":22.08,"amount_eur":4825.60,"wkn":"TMG4TT","isin":"LU2479335734","source":"User bestätigt","depot":"depot2"},
     {"date":"2026-09-09","type":"Verkauf","name":"boerse.de-Aktienfonds - V EUR ACC","quantity":100,"price":135.25,"price_currency":"EUR","fees_eur":44.52,"amount_eur":13480.48,"wkn":"A2PZMR","isin":"LU2115464500","source":"User bestätigt","depot":"depot2"},
