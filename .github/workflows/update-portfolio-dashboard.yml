@@ -85,11 +85,30 @@ jobs:
           print(f"Validated {len(prices)} positive prices.")
           PY
 
-      - name: Compile Python sources
-        run: python -m compileall -q scripts tests
+      - name: Syntax-check all Python sources
+        run: |
+          python -m compileall -q -f scripts tests
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+          files = sorted([*Path("scripts").rglob("*.py"), *Path("tests").rglob("*.py")])
+          for path in files:
+              ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+          print(f"AST-validated {len(files)} Python files.")
+          PY
 
       - name: Run regression tests
         run: pytest -q
+
+      - name: Verify deployment scripts are idempotent
+        run: |
+          cp index.html /tmp/index.before-idempotency.html
+          python scripts/update_transactions_data.py
+          cp index.html /tmp/index.after-first-render.html
+          python scripts/update_transactions_data.py
+          cmp /tmp/index.after-first-render.html index.html
+          git checkout -- index.html
+          echo "Transaction renderer is idempotent."
 
       - name: Calculate current portfolio
         run: |
