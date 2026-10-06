@@ -112,12 +112,12 @@ def main() -> int:
     tbody = re.search(r'<tbody>(.*?)</tbody>', section.group(1), flags=re.S)
     assert tbody, "Transaction table body missing"
     rendered_rows = tbody.group(1).count("<tr>")
-    manual_effective = 8
+    manual_effective = 9
     source_manual_duplicates = sum(1 for x in depot2 if x.get("date") in {"2026-08-28","2026-09-09"} and x.get("name") in {"Amazon.com Inc.","Schneider Electric SE","boerse.de-Technologiefonds - T EUR ACC","boerse.de-Aktienfonds - V EUR ACC","iShares STOXX Europe 600 UCITS ETF (DE) EUR Acc","VanEck World Equal Weight Screened UCITS ETF","Einzahlung","Auszahlung"})
     expected_rendered = expected_source + manual_effective - source_manual_duplicates
     assert f"{expected_rendered} Vorgänge" in html, "Rendered transaction badge is not derived from the effective ledger"
     assert rendered_rows == expected_rendered, f"Expected {expected_rendered} rendered transaction rows, got {rendered_rows}"
-    assert "28.08.2026" in section.group(1) and "+1.000,00 €" in section.group(1), "Confirmed Depot 2 deposit missing"
+    assert "28.08.2026" in section.group(1) and "+1.000,00 €" in section.group(1), "Confirmed Depot 2 deposit missing"\n    assert "05.10.2026" in section.group(1) and "KESt-Verlustausgleich" in section.group(1) and "+360,10 €" in section.group(1), "KESt loss offset deposit missing"
     assert "Amazon.com Inc." in section.group(1) and "-448,50 €" in section.group(1), "Amazon purchase missing"
     assert "Schneider Electric SE" in section.group(1) and "-613,82 €" in section.group(1), "Schneider Electric purchase missing"
     assert "09.09.2026" in section.group(1), "9 Sep 2026 transactions missing"
