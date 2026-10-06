@@ -13,6 +13,7 @@ HISTORY = ROOT / "data/history/portfolio-history.json"
 SECURITY_HISTORY = ROOT / "data/history/security-history.json"
 TX1 = ROOT / "data/transactions-depot1.json"
 TX2 = ROOT / "data/transactions.json"
+MANUAL_TX = ROOT / "data/portfolio/manual-dashboard-transactions.json"
 
 PAGES = {
     "history": "Gesamtdepotentwicklung",
@@ -45,6 +46,7 @@ def main() -> int:
     security_history = json.loads(SECURITY_HISTORY.read_text(encoding="utf-8"))["snapshots"]
     depot1 = json.loads(TX1.read_text(encoding="utf-8"))["transactions"]
     depot2 = json.loads(TX2.read_text(encoding="utf-8"))["transactions"]
+    manual_tx = json.loads(MANUAL_TX.read_text(encoding="utf-8"))["transactions"]
 
     for page_id, title in PAGES.items():
         assert re.search(rf'<section id="{page_id}" class="page(?: active)?">', html), f"Page {page_id} missing"
@@ -112,7 +114,7 @@ def main() -> int:
     tbody = re.search(r'<tbody>(.*?)</tbody>', section.group(1), flags=re.S)
     assert tbody, "Transaction table body missing"
     rendered_rows = tbody.group(1).count("<tr>")
-    manual_effective = 9
+    manual_effective = len(manual_tx)
     source_manual_duplicates = sum(1 for x in depot2 if x.get("date") in {"2026-08-28","2026-09-09"} and x.get("name") in {"Amazon.com Inc.","Schneider Electric SE","boerse.de-Technologiefonds - T EUR ACC","boerse.de-Aktienfonds - V EUR ACC","iShares STOXX Europe 600 UCITS ETF (DE) EUR Acc","VanEck World Equal Weight Screened UCITS ETF","Einzahlung","Auszahlung"})
     expected_rendered = expected_source + manual_effective - source_manual_duplicates
     assert f"{expected_rendered} Vorgänge" in html, "Rendered transaction badge is not derived from the effective ledger"
