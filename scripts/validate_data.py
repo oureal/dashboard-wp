@@ -126,6 +126,8 @@ def build_report(root: Path = ROOT) -> dict:
     migrated_total = sum(float(row["legacy_market_value_eur"]) for row in holdings) + migrated_cash
     price_plausibility = []
     for row in holdings:
+        if row["as_of"] > LEGACY_CUTOFF:
+            continue
         if not row["quantity"] or not row["derived_legacy_unit_price_eur"]:
             continue
         quantity = Decimal(row["quantity"])
