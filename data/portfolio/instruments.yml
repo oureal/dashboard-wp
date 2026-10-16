@@ -467,7 +467,8 @@
       "exchange": "Euronext Amsterdam",
       "price_source": "yahoo",
       "legacy_price_reference": "user-confirmed purchase 2026-10-16",
-      "missing_fields": []
+      "missing_fields": [],
+      "sector": "IT"
     }
   ]
 }
