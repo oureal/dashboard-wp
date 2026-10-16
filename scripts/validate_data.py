@@ -103,6 +103,16 @@ def build_report(root: Path = ROOT) -> dict:
         if row["as_of"] <= LEGACY_CUTOFF
         and instrument_by_id[row["instrument_id"]]["asset_type"] == "equity"
     )
+    # Preserve the initial valuation of positions whose holding date was updated by a later purchase.
+    baseline_ids = {row["instrument_id"] for row in holdings if row["as_of"] <= LEGACY_CUTOFF}
+    migrated_direct += sum(
+        float(tx["gross_value_eur"])
+        for tx in transactions
+        if tx["date"] <= LEGACY_CUTOFF
+        and tx["instrument_id"] not in baseline_ids
+        and instrument_by_id[tx["instrument_id"]]["asset_type"] == "equity"
+        and tx["type"] == "BUY"
+    )
     check(
         "direct_holdings_consistent_with_company_exposures",
         close(migrated_direct, company_direct) and close(company_direct, meta["directTotal"]),
