@@ -3,6 +3,33 @@
     {
       "date": "2026-10-16",
       "type": "Kauf",
+      "name": "Schneider Electric SE",
+      "quantity": 1,
+      "price": 256.15,
+      "price_currency": "EUR",
+      "fees_eur": 4.6,
+      "amount_eur": -260.75,
+      "wkn": "860180",
+      "isin": "FR0000121972",
+      "source": "User bestätigt",
+      "depot": "depot2"
+    },
+    {
+      "date": "2026-10-16",
+      "type": "Kauf",
+      "name": "Siemens Energy AG",
+      "quantity": 1,
+      "price": 134.78,
+      "price_currency": "EUR",
+      "fees_eur": 4.6,
+      "amount_eur": -139.38,
+      "isin": "DE000ENER6Y0",
+      "source": "User bestätigt",
+      "depot": "depot2"
+    },
+    {
+      "date": "2026-10-16",
+      "type": "Kauf",
       "name": "Allianz SE",
       "quantity": 1,
       "price": 433.5,
