@@ -469,6 +469,22 @@
       "legacy_price_reference": "user-confirmed purchase 2026-10-16",
       "missing_fields": [],
       "sector": "IT"
+    },
+    {
+      "id": "intuitive-surgical",
+      "name": "Intuitive Surgical Inc.",
+      "sector": "Health Care",
+      "isin": "US46120E6023",
+      "wkn": null,
+      "asset_type": "equity",
+      "trading_currency": "EUR",
+      "ticker": "ISRG",
+      "exchange": "NASDAQ",
+      "price_source": "yahoo",
+      "legacy_price_reference": "user-confirmed Gettex purchase 2026-10-19",
+      "missing_fields": [
+        "wkn"
+      ]
     }
   ]
 }
