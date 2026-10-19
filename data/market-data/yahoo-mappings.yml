@@ -458,6 +458,22 @@
       "preferred_currency": "EUR",
       "enabled_for_test": true,
       "notes": "Candidate must pass Yahoo runtime validation before use."
+    },
+    {
+      "instrument_id": "intuitive-surgical",
+      "isin": "US46120E6023",
+      "symbol": "ISRG",
+      "mapping_status": "candidate_live_validation",
+      "expected_name_tokens": [
+        "intuitive",
+        "surgical"
+      ],
+      "allowed_quote_types": [
+        "EQUITY"
+      ],
+      "preferred_currency": null,
+      "enabled_for_test": true,
+      "notes": "US Nasdaq listing; quote conversion to EUR by existing market-data pipeline. Confirmed Gettex purchase on 2026-10-19."
     }
   ]
 }
