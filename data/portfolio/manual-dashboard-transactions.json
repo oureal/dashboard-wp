@@ -1,6 +1,25 @@
 {
   "transactions": [
     {
+      "date": "2026-10-20",
+      "type": "Ausschüttung",
+      "name": "iShares STOXX Europe 600 UCITS ETF (DE) EUR Acc",
+      "amount_eur": -71.76,
+      "wkn": "A2QP4B",
+      "isin": "DE000A2QP4B6",
+      "source": "User bestätigt: negative Ausschüttung",
+      "depot": "depot2"
+    },
+    {
+      "date": "2026-10-20",
+      "type": "Ausschüttung",
+      "name": "iShares Dow Jones Global Titans 50 UCITS ETF (DE)",
+      "amount_eur": -125.15,
+      "isin": "DE0006289382",
+      "source": "User bestätigt: negative Ausschüttung",
+      "depot": "depot2"
+    },
+    {
       "date": "2026-10-19",
       "type": "Kauf",
       "name": "Intuitive Surgical Inc.",
