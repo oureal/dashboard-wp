@@ -2787,11 +2787,11 @@
     },
     {
       "date": "30.10.2026",
-      "value": 120023.191109,
+      "value": 120034.751765,
       "validated": true,
       "net_contributions": 87092.41,
-      "gain": 32930.78,
-      "simple_return": 0.37811309
+      "gain": 32942.34,
+      "simple_return": 0.37824582
     }
   ]
 }
