@@ -1,6 +1,14 @@
 {
   "transactions": [
     {
+      "date": "2026-10-30",
+      "type": "Einzahlung",
+      "name": "Einzahlung",
+      "amount_eur": 1000,
+      "source": "User bestätigt",
+      "depot": "depot2"
+    },
+    {
       "date": "2026-10-20",
       "type": "Ausschüttung",
       "name": "iShares STOXX Europe 600 UCITS ETF (DE) EUR Acc",
