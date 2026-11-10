@@ -7,6 +7,7 @@ name: Update portfolio dashboard
       timezone: "Europe/Vienna"
   push:
     paths:
+      - "index.html"
       - ".github/workflows/update-portfolio-dashboard.yml"
       - "requirements-dev.txt"
       - "scripts/sync_dashboard_header.py"
