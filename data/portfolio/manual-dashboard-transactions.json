@@ -1,6 +1,20 @@
 {
   "transactions": [
     {
+      "date": "2026-11-16",
+      "type": "Kauf",
+      "name": "Schneider Electric SE",
+      "quantity": 2,
+      "price": 240.5,
+      "price_currency": "EUR",
+      "fees_eur": 4.6,
+      "amount_eur": -485.6,
+      "wkn": "860180",
+      "isin": "FR0000121972",
+      "source": "DADAT Gettex ausgeführt; Order 8.152.485",
+      "depot": "depot2"
+    },
+    {
       "date": "2026-10-30",
       "type": "Einzahlung",
       "name": "Einzahlung",
