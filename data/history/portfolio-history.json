@@ -2912,6 +2912,14 @@
       "net_contributions": 87092.41,
       "gain": 33872.7,
       "simple_return": 0.38892827
+    },
+    {
+      "date": "18.11.2026",
+      "value": 120011.295977,
+      "validated": true,
+      "net_contributions": 87092.41,
+      "gain": 32918.89,
+      "simple_return": 0.37797657
     }
   ]
 }
