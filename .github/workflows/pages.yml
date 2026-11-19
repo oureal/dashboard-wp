@@ -1,6 +1,15 @@
-name: Deploy dashboard to GitHub Pages (manual fallback)
+name: Deploy dashboard to GitHub Pages (direct)
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - index.html
+      - data/portfolio/holdings.csv
+      - data/portfolio/cash.csv
+      - data/portfolio/transactions.csv
+      - data/portfolio/manual-dashboard-transactions.json
+      - .github/workflows/pages.yml
   workflow_dispatch:
 
 permissions:
@@ -9,27 +18,35 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages-manual-fallback"
-  cancel-in-progress: true
+  group: pages-direct-deployment
+  cancel-in-progress: false
 
 jobs:
   deploy:
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout latest dashboard
         uses: actions/checkout@v4
-
+        with:
+          ref: main
+      - name: Verify dashboard exists
+        run: |
+          test -s index.html
+          grep -q '18.11.2026' index.html
+          grep -q 'MARVELL TECH' index.html
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
-
-      - name: Upload site
+      - name: Prepare website
+        run: |
+          mkdir -p _site
+          cp index.html _site/index.html
+      - name: Upload website
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "."
-
-      - name: Deploy to GitHub Pages
+          path: _site
+      - name: Publish website
         id: deployment
         uses: actions/deploy-pages@v4
