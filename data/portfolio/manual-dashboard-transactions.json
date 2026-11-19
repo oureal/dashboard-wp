@@ -1,6 +1,20 @@
 {
   "transactions": [
     {
+      "date": "2026-11-19",
+      "type": "Kauf",
+      "name": "Thales S.A.",
+      "quantity": 3,
+      "price": 227.5,
+      "price_currency": "EUR",
+      "fees_eur": 4.6,
+      "amount_eur": -687.1,
+      "wkn": "850842",
+      "isin": "FR0000121329",
+      "source": "User bestätigt",
+      "depot": "depot2"
+    },
+    {
       "date": "2026-11-18",
       "type": "Kauf",
       "name": "Allianz SE",
