@@ -245,6 +245,34 @@ jobs:
       - name: Browser end-to-end deployment gate
         run: python tests/browser_smoke_test.py
 
+      - name: Require full verified fundamental analysis for every ranking instrument
+        run: |
+          python - <<'PY'
+          import json, re
+          from datetime import datetime, timezone
+          from pathlib import Path
+          html = Path("index.html").read_text(encoding="utf-8")
+          anchor = html.index("<!-- investment-ranking-v2:start -->")
+          match = re.search(r"const entries=(\[.*?\]);", html[anchor:], flags=re.S)
+          assert match, "Investment ranking not found"
+          entries = json.loads(match.group(1))
+          assert len(entries) == 36, f"Expected 36 instruments, found {len(entries)}"
+          today = datetime.now(timezone.utc).date().isoformat()
+          failures = []
+          for entry in entries:
+              a = entry.get("deepAnalysis") or {}
+              name = entry.get("name", "unknown")
+              required = ("filing", "filingSource", "fundamentalConclusion", "businessDrivers",
+                          "monitoring", "portfolioOverlap", "bear", "base", "bull",
+                          "valuationModel", "analystDisagreement", "researchAsOf")
+              missing = [key for key in required if not a.get(key)]
+              if missing or a.get("primarySourceVerified") is not True or a.get("researchAsOf") != today:
+                  failures.append(f"{name}: missing={missing}; primary={a.get('primarySourceVerified')}; date={a.get('researchAsOf')}")
+          if failures:
+              raise SystemExit("FULL-ANALYSIS PUBLICATION BLOCKED: " + " | ".join(failures))
+          print(f"Verified {len(entries)} complete, same-day fundamental analyses.")
+          PY
+
       - name: Upload private dashboard artifact
         uses: actions/upload-artifact@v7
         with:
