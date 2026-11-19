@@ -265,6 +265,12 @@ tr:hover td{background:var(--theme-table-row)}
 .theme-toggle:focus-visible{outline:3px solid rgba(53,121,214,.35);outline-offset:2px}
 .theme-toggle-icon{font-size:15px;line-height:1}.theme-toggle-label{font-size:11px;white-space:nowrap}
 html[data-theme="light"] .tile{border-color:rgba(255,255,255,.72)}
+/* lookthrough-treemap-contrast-v1: dark navy lettering on light, opaque label plates */
+html[data-theme="dark"] #treemapBox .tile{color:#142238}
+html[data-theme="dark"] #treemapBox .tile b,
+html[data-theme="dark"] #treemapBox .tile span{color:#142238;background:rgba(255,255,255,.92);text-shadow:none;box-decoration-break:clone;-webkit-box-decoration-break:clone;border-radius:3px;padding:2px 4px;width:fit-content;max-width:100%;overflow-wrap:anywhere}
+html[data-theme="dark"] #treemapBox .tile span{opacity:1;margin-top:3px}
+
 html[data-theme="light"] .card{box-shadow:0 10px 30px rgba(41,72,112,.09)}
 html[data-theme="light"] .kpi .value{color:#13213a}
 html[data-theme="light"] a{color:#236bb2}
