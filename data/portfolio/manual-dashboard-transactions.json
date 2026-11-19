@@ -1,6 +1,58 @@
 {
   "transactions": [
     {
+      "date": "2026-11-18",
+      "type": "Kauf",
+      "name": "Allianz SE",
+      "quantity": 1,
+      "price": 460.6,
+      "price_currency": "EUR",
+      "fees_eur": 4.6,
+      "amount_eur": -465.2,
+      "isin": "DE0008404005",
+      "source": "DADAT Gettex ausgeführt; Order 8.175.538",
+      "depot": "depot2"
+    },
+    {
+      "date": "2026-11-18",
+      "type": "Kauf",
+      "name": "Siemens Energy AG",
+      "quantity": 2,
+      "price": 126.86,
+      "price_currency": "EUR",
+      "fees_eur": 4.6,
+      "amount_eur": -258.32,
+      "isin": "DE000ENER6Y0",
+      "source": "DADAT Gettex ausgeführt; Order 8.175.543",
+      "depot": "depot2"
+    },
+    {
+      "date": "2026-11-18",
+      "type": "Kauf",
+      "name": "Marvell Technology Inc",
+      "quantity": 1,
+      "price": 131.34,
+      "price_currency": "EUR",
+      "fees_eur": 4.6,
+      "amount_eur": -135.94,
+      "isin": "US5738741041",
+      "source": "DADAT Gettex ausgeführt; Order 8.175.548",
+      "depot": "depot2"
+    },
+    {
+      "date": "2026-11-18",
+      "type": "Kauf",
+      "name": "Intuitive Surgical Inc.",
+      "quantity": 1,
+      "price": 386.8,
+      "price_currency": "EUR",
+      "fees_eur": 4.6,
+      "amount_eur": -391.4,
+      "isin": "US46120E6023",
+      "source": "DADAT Gettex ausgeführt; Order 8.175.553",
+      "depot": "depot2"
+    },
+    {
       "date": "2026-11-16",
       "type": "Kauf",
       "name": "Schneider Electric SE",
