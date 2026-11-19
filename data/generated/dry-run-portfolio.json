@@ -197,10 +197,10 @@
       "depot": "Depot 2",
       "instrument_id": "wisdomtree-physical-bitcoin",
       "quantity": 60.0,
-      "price": 13.355,
+      "price": 13.341,
       "currency": "EUR",
-      "valuation_price_eur": 13.355,
-      "market_value_eur": 801.3,
+      "valuation_price_eur": 13.341,
+      "market_value_eur": 800.46,
       "price_status": "fresh"
     },
     {
@@ -325,13 +325,13 @@
     }
   ],
   "cash": 4089.93,
-  "total": 116905.105081,
+  "total": 116904.265081,
   "direct_total": 64685.934394,
   "fund_etf_total": 40635.660535,
   "gold": 6692.280151,
-  "bitcoin_etp": 801.3,
+  "bitcoin_etp": 800.46,
   "resolved": 86978.230125,
-  "unresolved": 29926.874956,
+  "unresolved": 29926.034956,
   "companies": [
     {
       "name": "Berkshire Hathaway",
@@ -13493,7 +13493,7 @@
     },
     {
       "name": "wisdomtree-physical-bitcoin",
-      "value": 801.3
+      "value": 800.46
     },
     {
       "name": "marvell-technology",
@@ -13546,7 +13546,7 @@
   ],
   "top10": 61815.904719,
   "top20": 73593.785879,
-  "hhi": 717.746338,
+  "hhi": 717.756652,
   "validations": {
     "resolved_plus_unresolved_equals_total": true,
     "company_exposures_equal_resolved": true,
