@@ -14,6 +14,7 @@ name: Update portfolio dashboard
       - "scripts/apply_dashboard_theme.py"
       - "scripts/apply_dashboard_theme_v2.py"
       - "scripts/update_dashboard_data.py"
+      - "scripts/research_all_instruments.py"
       - "scripts/update_movers_data.py"
       - "scripts/update_transactions_data.py"
       - "scripts/reconstruct_portfolio_history.py"
@@ -63,6 +64,12 @@ jobs:
 
       - name: Install dependencies
         run: python -m pip install --requirement requirements-dev.txt
+
+      - name: Research every ranking instrument before any publication
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          RESEARCH_MODEL: gpt-4.1
+        run: python scripts/research_all_instruments.py
 
       - name: Verify immutable legacy history before update
         run: python scripts/verify_immutable_history.py
