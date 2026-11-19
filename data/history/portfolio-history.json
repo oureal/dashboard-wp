@@ -2923,11 +2923,11 @@
     },
     {
       "date": "19.11.2026",
-      "value": 116928.977495,
+      "value": 116889.029838,
       "validated": true,
       "net_contributions": 87092.41,
-      "gain": 29836.57,
-      "simple_return": 0.34258519
+      "gain": 29796.62,
+      "simple_return": 0.34212648
     }
   ]
 }
