@@ -3,6 +3,20 @@
     {
       "date": "2026-11-19",
       "type": "Kauf",
+      "name": "iShares Dow Jones Global Titans 50 UCITS ETF",
+      "quantity": 5,
+      "price": 108.94,
+      "price_currency": "EUR",
+      "fees_eur": 4.6,
+      "amount_eur": -549.3,
+      "wkn": "628938",
+      "isin": "DE0006289382",
+      "source": "DADAT Gettex ausgeführt; Order 8.180.152",
+      "depot": "depot2"
+    },
+    {
+      "date": "2026-11-19",
+      "type": "Kauf",
       "name": "Thales S.A.",
       "quantity": 3,
       "price": 227.5,
