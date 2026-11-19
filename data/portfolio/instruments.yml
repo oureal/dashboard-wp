@@ -485,6 +485,20 @@
       "missing_fields": [
         "wkn"
       ]
+    },
+    {
+      "id": "thales",
+      "name": "Thales S.A.",
+      "sector": "Industrials",
+      "isin": "FR0000121329",
+      "wkn": "850842",
+      "asset_type": "equity",
+      "trading_currency": "EUR",
+      "ticker": "HO.PA",
+      "exchange": "Euronext Paris",
+      "price_source": "yfinance",
+      "legacy_price_reference": "user-confirmed Gettex purchase 2026-11-19",
+      "missing_fields": []
     }
   ]
 }
