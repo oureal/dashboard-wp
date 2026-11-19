@@ -474,6 +474,21 @@
       "preferred_currency": null,
       "enabled_for_test": true,
       "notes": "US Nasdaq listing; quote conversion to EUR by existing market-data pipeline. Confirmed Gettex purchase on 2026-10-19."
+    },
+    {
+      "instrument_id": "thales",
+      "isin": "FR0000121329",
+      "symbol": "HO.PA",
+      "mapping_status": "candidate_live_validation",
+      "expected_name_tokens": [
+        "thales"
+      ],
+      "allowed_quote_types": [
+        "EQUITY"
+      ],
+      "preferred_currency": "EUR",
+      "enabled_for_test": true,
+      "notes": "Euronext Paris EUR listing, user-confirmed Gettex purchase 2026-11-19."
     }
   ]
 }
