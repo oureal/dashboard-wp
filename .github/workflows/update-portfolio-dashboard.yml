@@ -290,6 +290,9 @@ jobs:
         with:
           path: _site
 
+      - name: Wait for GitHub artifact metadata propagation
+        run: sleep 30
+
       - name: Deploy dashboard to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
