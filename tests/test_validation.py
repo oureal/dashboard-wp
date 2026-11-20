@@ -54,7 +54,7 @@ def test_confirmed_quantities_and_identifiers_are_complete():
         "boerse-de-aktienfonds": ("30", "LU2115464500", "A2PZMR"),
         "ishares-global-titans-50": ("126", "DE0006289382", "628938"),
         "ishares-core-msci-world": ("27", "IE00B4L5Y983", "A0RPWH"),
-        "ishares-msci-world-value-factor": ("17", "IE00BP3QZB59", "A12ATG"),
+        "ishares-msci-world-value-factor": ("30", "IE00BP3QZB59", "A12ATG"),
         "wisdomtree-physical-bitcoin": ("60", "GB00BJYDH287", "A3GKGK"),
         "marvell-technology": ("5", "US5738741041", "A3CNLD"),
         "broadcom": ("2", "US11135F1012", "A2JG9Z"),
