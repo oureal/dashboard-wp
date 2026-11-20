@@ -1,6 +1,20 @@
 {
   "transactions": [
     {
+      "date": "2026-11-20",
+      "type": "Kauf",
+      "name": "iShares Edge MSCI World Value Factor UCITS ETF",
+      "quantity": 13,
+      "price": 66.01,
+      "price_currency": "EUR",
+      "fees_eur": 4.6,
+      "amount_eur": -863.9,
+      "wkn": "A12ATG",
+      "isin": "IE00BP3QZB59",
+      "source": "User bestätigt",
+      "depot": "depot2"
+    },
+    {
       "date": "2026-11-19",
       "type": "Kauf",
       "name": "iShares Dow Jones Global Titans 50 UCITS ETF",
