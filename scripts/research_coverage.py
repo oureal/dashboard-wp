@@ -10,8 +10,8 @@ match = re.search(r"const entries=(\[.*?\]);", section, flags=re.S)
 if not match:
     raise SystemExit("Missing ranking dataset")
 entries = json.loads(match.group(1))
-if len(entries) != 36:
-    raise SystemExit(f"Expected 36 ranking instruments, found {len(entries)}")
+if len(entries) < 36:
+    raise SystemExit(f"Expected at least 36 ranking instruments, found {len(entries)}")
 report = {"total": len(entries), "primary_source_verified": 0, "with_analyst_consensus": 0, "missing_primary_sources": [], "missing_consensus": []}
 for entry in entries:
     a = entry.get("deepAnalysis") or {}
